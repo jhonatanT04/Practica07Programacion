@@ -196,6 +196,11 @@ public class CrearCantante extends javax.swing.JInternalFrame {
         jLabel1.setBounds(123, 36, 0, 0);
 
         cbxGeneroMusical.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione el Género Musical-", "Reggaeton", "Trap", "Pop", "Rap", "Rock", "Bachata", "Cumbia", "Salsa", "Otro" }));
+        cbxGeneroMusical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxGeneroMusicalActionPerformed(evt);
+            }
+        });
         jpanelA.add(cbxGeneroMusical);
         cbxGeneroMusical.setBounds(270, 338, 197, 22);
 
@@ -236,13 +241,19 @@ public class CrearCantante extends javax.swing.JInternalFrame {
                 int numeroSencillos = Integer.parseInt(txtNumeroSencillos.getText());
                 int numeroConciertos = Integer.parseInt(txtNumeroConciertos.getText());
                 int numeroGiras = Integer.parseInt(txtNumeroGiras.getText());
-                Cantante cantante = new Cantante(nombreArtistico, genero, numeroSencillos, numeroConciertos, numeroGiras, id, nombre, apellido, edad, nacionalidad, salario);
-                //Disco disco = new Disco(12, "La noche", 2000);
-                //cantante.agregarDisco(disco);
-                controladorCantante.registrar(cantante); 
-                this.limpiarCampos();
-                JOptionPane.showMessageDialog(this, mensajes.getString("joption.secreocantante")); 
-                System.out.println(controladorCantante.verCantantes());
+                if (genero==cbxGeneroMusical.getItemAt(0)) {                    
+                    JOptionPane.showMessageDialog(this,"Cambie el genero musical" );
+                }else{
+                    if (nombre.length()>25 || apellido.length()>25) {
+                        JOptionPane.showMessageDialog(this, "El nombre o apellido es muy largo debe ser menor a 25");
+                    }else{
+                        Cantante cantante = new Cantante(llenarEspacio(nombreArtistico), llenarEspacio(genero), numeroSencillos, numeroConciertos, numeroGiras, id, llenarEspacio(nombre), llenarEspacio(apellido), edad, llenarEspacio(nacionalidad), salario);
+                        controladorCantante.registrar(cantante); 
+                        this.limpiarCampos();
+                        JOptionPane.showMessageDialog(this, mensajes.getString("joption.secreocantante")); 
+                        System.out.println(controladorCantante.verCantantes());
+                    }
+                }
             }else{
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.elid")); 
             }
@@ -260,6 +271,10 @@ public class CrearCantante extends javax.swing.JInternalFrame {
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         this.limpiarCampos();
     }//GEN-LAST:event_formInternalFrameClosing
+
+    private void cbxGeneroMusicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxGeneroMusicalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxGeneroMusicalActionPerformed
     private boolean validacionDeCampos(){
         if (txtID.getText().isEmpty()||txtNombre.getText().isEmpty()||txtApellido.getText().isEmpty()||txtEdad.getText().isEmpty()||txtNacionalidad.getText().isEmpty()
                 || txtSalario.getText().isEmpty()||txtNombreArtistico.getText().isEmpty() ||txtNumeroSencillos.getText().isEmpty()
@@ -280,6 +295,15 @@ public class CrearCantante extends javax.swing.JInternalFrame {
         txtNumeroSencillos.setText("");
         txtNumeroGiras.setText("");
         cbxGeneroMusical.setSelectedIndex(0); 
+    }
+    
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 25; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -8,6 +8,10 @@ package ec.edu.ups.practica7.lucerojustin.tacurijhonatan.dao;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.idao.ICantanteDao;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cantante;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Disco;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,17 +21,45 @@ import java.util.List;
  * @author Usuario
  */
 public class CantanteDao implements ICantanteDao {
-    
+    private String ruta;
+    private RandomAccessFile archivoEscritura;
     private List<Cantante> listaCantantes;
 
     public CantanteDao() {
         listaCantantes = new ArrayList<>();
+        this.ruta = "C:\\Users\\venot\\OneDrive\\Escritorio\\Carpeta.Practica7\\Cantante.djj";
+        //this.ruta = "PON TU RUTA AQUI GEI SI QUIERES PROBAR Y COMENTA MI RUTA"
+        
     }
     
     
     @Override
     public void create(Cantante cantante) {
-        listaCantantes.add(cantante);
+        
+         try {
+            archivoEscritura = new RandomAccessFile(ruta, "rw");
+            archivoEscritura.seek(archivoEscritura.length());
+            archivoEscritura.writeInt(cantante.getCodigo());
+            archivoEscritura.writeUTF(cantante.getNombre());
+            archivoEscritura.writeUTF(cantante.getApellido());
+            archivoEscritura.writeInt(cantante.getEdad());
+            archivoEscritura.writeUTF(cantante.getNacionalidad());
+            archivoEscritura.writeUTF(cantante.getNombreArtistico());
+            archivoEscritura.writeUTF(cantante.getGeneroMusical());
+            archivoEscritura.writeInt(cantante.getNumeroDeSencillos());
+            archivoEscritura.writeInt(cantante.getNumeroDeConciertos());
+            archivoEscritura.writeInt(cantante.getNumeroDeGiras());
+            archivoEscritura.close();
+         }
+        catch(FileNotFoundException e){
+            System.out.println("Ruta no ecncontrada");
+        } catch(IOException e1){
+            System.out.println("Error de Escritura");
+        }
+        catch (Exception e) {
+            System.out.println("Error General");
+        }
+        
     }
 
     @Override
