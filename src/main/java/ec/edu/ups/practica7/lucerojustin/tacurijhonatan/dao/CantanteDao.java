@@ -54,6 +54,14 @@ public class CantanteDao implements ICantanteDao {
             archivoEscritura.writeInt(cantante.getNumeroDeConciertos());
             archivoEscritura.writeInt(cantante.getNumeroDeGiras());
             archivoEscritura.writeDouble(cantante.getSalario());
+            List<Disco> listaDisc = cantante.getDiscos();
+             for (int i = 0; i < 10; i++) {
+                 archivoEscritura.writeInt(listaDisc.get(i).getCodigo());
+                 archivoEscritura.writeUTF(listaDisc.get(i).getNombre());
+                 archivoEscritura.writeInt(listaDisc.get(i).getAnioDeLanzamiento());
+             }
+            
+            
             archivoEscritura.close();
          }
         catch(FileNotFoundException e){
@@ -71,7 +79,7 @@ public class CantanteDao implements ICantanteDao {
     public Cantante read(int codigo) {
         try {
             archivoLectura = new RandomAccessFile(ruta, "r");
-            int bytesPorCantante = 163;
+            int bytesPorCantante = 363;
             long numCantantes = archivoLectura.length() / bytesPorCantante;
 
             for (int i = 0; i < numCantantes; i++) {
@@ -89,6 +97,7 @@ public class CantanteDao implements ICantanteDao {
                     int numeroDeConciertos = archivoLectura.readInt();
                     int numeroDeGiras = archivoLectura.readInt();
                     double salario = archivoLectura.readDouble();
+                    
                     archivoLectura.close();
 
                     return new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigo, nombre, apellido, edad, nacionalidad,salario);
@@ -110,7 +119,7 @@ public class CantanteDao implements ICantanteDao {
     public void update(Cantante cantante) {
          try {
             RandomAccessFile archivo = new RandomAccessFile(ruta, "rw");
-            int bytesPorCantante = 163;
+            int bytesPorCantante = 363 ;
             long numCantantes = archivo.length() / bytesPorCantante;
             for (int i = 0; i < numCantantes; i++) {
                 archivo.seek(i * bytesPorCantante);
@@ -148,7 +157,7 @@ public class CantanteDao implements ICantanteDao {
         try{
             archivito = new RandomAccessFile(ruta, "rw");
 
-            int bytesPorCantante = 163;
+            int bytesPorCantante = 363;
             long numCantantes = archivito.length() / bytesPorCantante;
 
             for (int i = 0; i < numCantantes; i++) {
@@ -199,7 +208,7 @@ public class CantanteDao implements ICantanteDao {
         List<Cantante> listaCantantes = new ArrayList<>();
     try {
         RandomAccessFile archivoLectura = new RandomAccessFile(ruta, "r");
-        int bytesPorCantante = 163;
+        int bytesPorCantante = 363 ;
         long numCantantes = archivoLectura.length() / bytesPorCantante;
         System.out.println(numCantantes);
         for (int i = 0; i < numCantantes; i++) {

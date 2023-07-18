@@ -25,15 +25,7 @@ public class Cantante extends Persona { // Define la clase Cantante, que extiend
         discografia = new ArrayList(); // Inicializa la lista de discos del cantante
     }
 
-    public Cantante(String nombreArtistico) {
-        this.nombreArtistico = nombreArtistico;
-    }
-
     
-    
-    public Cantante(int codigo, String nombre, String apellido, int edad, String nacionalidad) {
-        super(codigo, nombre, apellido, edad, nacionalidad);
-    }
 
     
     
@@ -45,6 +37,7 @@ public class Cantante extends Persona { // Define la clase Cantante, que extiend
         this.numeroDeConciertos = numeroDeConciertos; // Asigna el número de conciertos del cantante
         this.numeroDeGiras = numeroDeGiras; // Asigna el número de giras del cantante
         discografia = new ArrayList();
+        
     }
  
     @Override

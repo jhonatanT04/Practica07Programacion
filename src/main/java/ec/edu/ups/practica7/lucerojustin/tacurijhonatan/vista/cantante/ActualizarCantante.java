@@ -280,10 +280,10 @@ public class ActualizarCantante extends javax.swing.JInternalFrame {
         int numeroSencillos = Integer.parseInt(txtNumeroSencillos.getText());
         int numeroConciertos = Integer.parseInt(txtNumeroConciertos.getText());
         int numeroGiras = Integer.parseInt(txtNumeroGiras.getText());
-        if (nombre.length()>25 || apellido.length()>25) {
-            JOptionPane.showMessageDialog(this, "El nombre o apellido es muy largo debe ser menor a 25");
+        if (nombre.length()>25 || apellido.length()>25||nacionalidad.length()>25) {
+            JOptionPane.showMessageDialog(this, "El nombre ,apellido o apellido es muy largo debe ser menor a 25");
         }else{
-            Cantante cantante = new Cantante(nombreArtistico, genero, numeroSencillos, numeroConciertos, numeroGiras, id, nombre, apellido, edad, nacionalidad, salario);
+            Cantante cantante = new Cantante(llenarEspacio(nombreArtistico), llenarEspacio(genero), numeroSencillos, numeroConciertos, numeroGiras, id, llenarEspacio(nombre), llenarEspacio(apellido), edad, llenarEspacio(nacionalidad), salario);
             cantante.setDiscos(listaDiscos);
             controladorCantante.actualizar(cantante);
             this.limpiarCampos();
