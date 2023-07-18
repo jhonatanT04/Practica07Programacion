@@ -202,7 +202,6 @@ public class CantanteDao implements ICantanteDao {
             int bytesPorCantante = 163;
             long numCantantes = archivoLectura.length() / bytesPorCantante;
             for (int i = 0; i < numCantantes; i++) {
-                System.out.println("AAAAAAAAAAAAAA "+i);
                 archivoLectura.seek(i * bytesPorCantante);
                 int codigoCantante = archivoLectura.readInt();
                 String nombre = archivoLectura.readUTF();
@@ -215,12 +214,11 @@ public class CantanteDao implements ICantanteDao {
                 int numeroDeConciertos = archivoLectura.readInt();
                 int numeroDeGiras = archivoLectura.readInt();
                 double salario = archivoLectura.readDouble();
-                Cantante cant = new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigoCantante, nombre, apellido, edad, nacionalidad,salario);
+                Cantante cant = new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigoCantante, nombre, apellido, edad, nacionalidad, salario);
                 listaCantantes.add(cant);
-                System.out.println(listaCantantes.toString());
-                archivoLectura.close();
             }
-        }catch (FileNotFoundException e) {
+            archivoLectura.close(); // Cerrar el archivo después del bucle
+        } catch (FileNotFoundException e) {
             System.out.println("Ruta no encontrada");
         } catch (IOException e1) {
             System.out.println("Error de Lectura/Escritura");
