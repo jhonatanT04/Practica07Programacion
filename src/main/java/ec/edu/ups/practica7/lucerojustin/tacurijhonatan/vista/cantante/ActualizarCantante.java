@@ -280,16 +280,22 @@ public class ActualizarCantante extends javax.swing.JInternalFrame {
         int numeroSencillos = Integer.parseInt(txtNumeroSencillos.getText());
         int numeroConciertos = Integer.parseInt(txtNumeroConciertos.getText());
         int numeroGiras = Integer.parseInt(txtNumeroGiras.getText());
-        Cantante cantante = new Cantante(nombreArtistico, genero, numeroSencillos, numeroConciertos, numeroGiras, id, nombre, apellido, edad, nacionalidad, salario);
-        cantante.setDiscos(listaDiscos);
-        controladorCantante.actualizar(cantante);
-        this.limpiarCampos();
-        JOptionPane.showMessageDialog(this, mensajes.getString("joption.seactualizoelcantante")); 
-        System.out.println(controladorCantante.verCantantes());
-        this.visibilidad(false);
-        bntActualizar.setEnabled(false);
-        this.limpiarCampos();
-        bntBuscar.setEnabled(true);
+        if (nombre.length()>25 || apellido.length()>25) {
+            JOptionPane.showMessageDialog(this, "El nombre o apellido es muy largo debe ser menor a 25");
+        }else{
+            Cantante cantante = new Cantante(nombreArtistico, genero, numeroSencillos, numeroConciertos, numeroGiras, id, nombre, apellido, edad, nacionalidad, salario);
+            cantante.setDiscos(listaDiscos);
+            controladorCantante.actualizar(cantante);
+            this.limpiarCampos();
+            JOptionPane.showMessageDialog(this, mensajes.getString("joption.seactualizoelcantante")); 
+            System.out.println(controladorCantante.verCantantes());
+            this.visibilidad(false);
+            bntActualizar.setEnabled(false);
+            this.limpiarCampos();
+            bntBuscar.setEnabled(true);
+        }
+        
+        
     }//GEN-LAST:event_bntActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -329,7 +335,17 @@ public class ActualizarCantante extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_bntBuscarActionPerformed
-
+    
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 25; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
+    }
+    
+    
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         // TODO add your handling code here:
        

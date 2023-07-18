@@ -244,14 +244,14 @@ public class CrearCantante extends javax.swing.JInternalFrame {
                 if (genero==cbxGeneroMusical.getItemAt(0)) {                    
                     JOptionPane.showMessageDialog(this,"Cambie el genero musical" );
                 }else{
-                    if (nombre.length()>25 || apellido.length()>25) {
+                    if (nombre.length()>25 || apellido.length()>25||) {
                         JOptionPane.showMessageDialog(this, "El nombre o apellido es muy largo debe ser menor a 25");
                     }else{
                         Cantante cantante = new Cantante(llenarEspacio(nombreArtistico), llenarEspacio(genero), numeroSencillos, numeroConciertos, numeroGiras, id, llenarEspacio(nombre), llenarEspacio(apellido), edad, llenarEspacio(nacionalidad), salario);
                         controladorCantante.registrar(cantante); 
                         this.limpiarCampos();
                         JOptionPane.showMessageDialog(this, mensajes.getString("joption.secreocantante")); 
-                        System.out.println(controladorCantante.verCantantes());
+                        //System.out.println(controladorCantante.verCantantes());
                     }
                 }
             }else{

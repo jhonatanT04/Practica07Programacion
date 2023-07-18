@@ -197,35 +197,39 @@ public class CantanteDao implements ICantanteDao {
     @Override
     public List<Cantante> findAll() {
         List<Cantante> listaCantantes = new ArrayList<>();
-        try {
-            archivoLectura = new RandomAccessFile(ruta, "r");
-            int bytesPorCantante = 163;
-            long numCantantes = archivoLectura.length() / bytesPorCantante;
-            for (int i = 0; i < numCantantes; i++) {
-                archivoLectura.seek(i * bytesPorCantante);
-                int codigoCantante = archivoLectura.readInt();
-                String nombre = archivoLectura.readUTF();
-                String apellido = archivoLectura.readUTF();
-                int edad = archivoLectura.readInt();
-                String nacionalidad = archivoLectura.readUTF();
-                String nombreArtistico = archivoLectura.readUTF();
-                String generoMusical = archivoLectura.readUTF();
-                int numeroDeSencillos = archivoLectura.readInt();
-                int numeroDeConciertos = archivoLectura.readInt();
-                int numeroDeGiras = archivoLectura.readInt();
-                double salario = archivoLectura.readDouble();
-                Cantante cant = new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigoCantante, nombre, apellido, edad, nacionalidad, salario);
-                listaCantantes.add(cant);
-            }
-            archivoLectura.close(); // Cerrar el archivo después del bucle
-        } catch (FileNotFoundException e) {
-            System.out.println("Ruta no encontrada");
-        } catch (IOException e1) {
-            System.out.println("Error de Lectura/Escritura");
-        } catch (Exception e) {
-            System.out.println("Error General");
+    try {
+        RandomAccessFile archivoLectura = new RandomAccessFile(ruta, "r");
+        int bytesPorCantante = 163;
+        long numCantantes = archivoLectura.length() / bytesPorCantante;
+        System.out.println(numCantantes);
+        for (int i = 0; i < numCantantes; i++) {
+            archivoLectura.seek(i * bytesPorCantante);
+            int codigo = archivoLectura.readInt();
+            
+            String nombre = archivoLectura.readUTF();
+            String apellido = archivoLectura.readUTF();
+            int edad = archivoLectura.readInt();
+            String nacionalidad = archivoLectura.readUTF();
+            String nombreArtistico = archivoLectura.readUTF();
+            String generoMusical = archivoLectura.readUTF();
+            int numeroDeSencillos = archivoLectura.readInt();
+            int numeroDeConciertos = archivoLectura.readInt();
+            int numeroDeGiras = archivoLectura.readInt();
+            double salario = archivoLectura.readDouble();
+            Cantante cantante = new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigo, nombre, apellido, edad, nacionalidad, salario);
+            listaCantantes.add(cantante);
         }
-        return listaCantantes;
+
+        archivoLectura.close();
+    } catch (FileNotFoundException e) {
+        System.out.println("Ruta no encontrada");
+    } catch (IOException e1) {
+        System.out.println("Error de Lectura");
+    } catch (Exception e) {
+        System.out.println("Error General");
+    }
+
+    return listaCantantes;
     }
     
 }
