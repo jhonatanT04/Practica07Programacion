@@ -8,6 +8,7 @@ package ec.edu.ups.practica7.lucerojustin.tacurijhonatan.vista.disco;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.controlador.ControladorCantante;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cantante;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Disco;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
@@ -315,6 +316,7 @@ public class AgregarDisco extends javax.swing.JInternalFrame {
                 txtNombreDisco.setEnabled(true);
                 txtCodigo.setEnabled(true);
                 txtAnioLanzamiento.setEnabled(true);
+                System.out.println(cantanteTempo.getDiscos().toString());
                 
             }else{
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.noexiste"));
@@ -328,15 +330,40 @@ public class AgregarDisco extends javax.swing.JInternalFrame {
         }else{
             int codigo = Integer.parseInt( txtCodigo.getText());
             if (cantanteTempo.buscarDisco(codigo)==null) {
-                String nombre =txtNombreDisco.getText();
+                if (codigo!=0) {
+                    String nombre =txtNombreDisco.getText();
                 int anio = Integer.parseInt( txtAnioLanzamiento.getText());
-                Disco disco = new Disco(codigo, nombre, anio);
-                cantanteTempo.agregarDisco(disco);
-                JOptionPane.showMessageDialog(this, mensajes.getString("joption.seacreado")); 
-                txtNombreDisco.setText("");
-                txtCodigo.setText("");
-                txtAnioLanzamiento.setText("");
-                System.out.println(cantanteTempo);
+                Disco disco = new Disco(codigo, this.llenarEspacio(nombre), anio);
+                List<Disco>listaDiscos = cantanteTempo.getDiscos();
+                boolean noEspacio =false;
+                System.out.println("Discos vacios "+listaDiscos.toString());
+                
+                for (int i = 0; i < listaDiscos.size(); i++) {
+                    if (listaDiscos.get(i).getCodigo()==0) {
+                        System.out.println("Numero de i  : "+i);
+                        listaDiscos.set(i, disco);
+                        noEspacio= true;
+                        break;
+                    }
+                }
+                if (noEspacio) {
+                    System.out.println("Lista de discos + "+listaDiscos.toString()+"\n--------------------------------");
+                    cantanteTempo.setDiscos(listaDiscos);
+                    controladorCantante.actualizar(cantanteTempo);
+                    JOptionPane.showMessageDialog(this, mensajes.getString("joption.seacreado")); 
+                    txtNombreDisco.setText("");
+                    txtCodigo.setText("");
+                    txtAnioLanzamiento.setText("");
+                    System.out.println(cantanteTempo);
+                }else{
+                    JOptionPane.showMessageDialog(this, "No existe mas espacio");
+                }
+                
+                
+                }else{
+                    JOptionPane.showMessageDialog(this, "El codigo debe de ser distinto a cero ");
+                }
+                
         }else{
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.elid")); 
         }
@@ -385,6 +412,14 @@ public class AgregarDisco extends javax.swing.JInternalFrame {
         txtNombreArtistico.setText(cantante.getNombreArtistico());
         txtApellido.setText(cantante.getApellido());
         
+    }
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

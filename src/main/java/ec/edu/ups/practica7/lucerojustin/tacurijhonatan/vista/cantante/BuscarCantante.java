@@ -272,7 +272,10 @@ public class BuscarCantante extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
             cantanteTempo = controladorCantante.buscarCantante(Integer.parseInt(txtID.getText()));
+            System.out.println("Cantantes"+controladorCantante.verCantantes());
+            
             if (cantanteTempo !=null) {
+                
                 txtNombre.setText(cantanteTempo.getNombre());
                 txtApellido.setText(cantanteTempo.getApellido());
                 txtEdad.setText( String.valueOf(cantanteTempo.getEdad()));
@@ -281,7 +284,7 @@ public class BuscarCantante extends javax.swing.JInternalFrame {
                 txtSalario.setText(String.valueOf(cantanteTempo.calcularSalario()));
                 txtNombreArtistico.setText(cantanteTempo.getNombreArtistico());
                 txtGeneroMusical.setText(cantanteTempo.getGeneroMusical());
-                txtNumeroSencillos.setText(String.valueOf(cantanteTempo.getNumeroDeSencillos()));
+                txtNumeroSencillos.setText(String.valueOf( cantanteTempo.getNumeroDeSencillos()));
                 txtNumeroConciertos.setText(String.valueOf(cantanteTempo.getNumeroDeConciertos()));
                 txtNumeroGiras.setText(String.valueOf(cantanteTempo.getNumeroDeGiras()));
                 this.actualizarTabla();
@@ -329,10 +332,13 @@ public class BuscarCantante extends javax.swing.JInternalFrame {
         //if (listaPersonas!=null) {
             for (Disco listaDicos : listaDico) {
                 int cod = listaDicos.getCodigo();
-                String nom = listaDicos.getNombre();
-                int anio = listaDicos.getAnioDeLanzamiento();
-                Object[] rowDate = {cod,nom,anio};
-                modelo.addRow(rowDate);
+                if (cod!=0) {
+                    String nom = listaDicos.getNombre();
+                    int anio = listaDicos.getAnioDeLanzamiento();
+                    Object[] rowDate = {cod,nom,anio};
+                    modelo.addRow(rowDate);
+                }
+                
             }
             this.tblDisco.setModel(modelo);
         //}else{

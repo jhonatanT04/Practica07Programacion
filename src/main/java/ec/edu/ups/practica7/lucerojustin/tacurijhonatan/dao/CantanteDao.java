@@ -55,11 +55,11 @@ public class CantanteDao implements ICantanteDao {
             archivoEscritura.writeInt(cantante.getNumeroDeGiras());
             archivoEscritura.writeDouble(cantante.getSalario());
             List<Disco> listaDisc = cantante.getDiscos();
-             for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10; i++) {
                  archivoEscritura.writeInt(listaDisc.get(i).getCodigo());
                  archivoEscritura.writeUTF(listaDisc.get(i).getNombre());
                  archivoEscritura.writeInt(listaDisc.get(i).getAnioDeLanzamiento());
-             }
+            }
             
             
             archivoEscritura.close();
@@ -97,10 +97,18 @@ public class CantanteDao implements ICantanteDao {
                     int numeroDeConciertos = archivoLectura.readInt();
                     int numeroDeGiras = archivoLectura.readInt();
                     double salario = archivoLectura.readDouble();
-                    
+                    Cantante cantante = new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigo, nombre, apellido, edad, nacionalidad,salario);
+                    for (int j = 0; i < 10; i++) {
+                        int codigoCan = archivoLectura.readInt();
+                        String nombreCAn = archivoLectura.readUTF();
+                        int anio = archivoLectura.readInt();
+                        Disco dis = new Disco(codigoCan, nombreCAn, anio);
+                        cantante.agregarDisco(dis);
+                        
+                    }
                     archivoLectura.close();
 
-                    return new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigo, nombre, apellido, edad, nacionalidad,salario);
+                    return cantante ;
             }
         }
         archivoLectura.close();
@@ -136,6 +144,14 @@ public class CantanteDao implements ICantanteDao {
                     archivo.writeInt(cantante.getNumeroDeConciertos());
                     archivo.writeInt(cantante.getNumeroDeGiras());
                     archivo.writeDouble(cantante.getSalario());
+                    List<Disco> listaDisc = cantante.getDiscos();
+                    System.out.println("Lista del update = "+ listaDisc.toString());
+                    for (int j = 0; i < listaDisc.size(); j++) {
+                        archivo.writeInt(listaDisc.get(j).getCodigo());
+                        archivo.writeUTF(listaDisc.get(j).getNombre());
+                        archivo.writeInt(listaDisc.get(j).getAnioDeLanzamiento());
+                    }
+                    
                     archivo.close();
                     return; 
             }
@@ -226,6 +242,13 @@ public class CantanteDao implements ICantanteDao {
             int numeroDeGiras = archivoLectura.readInt();
             double salario = archivoLectura.readDouble();
             Cantante cantante = new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigo, nombre, apellido, edad, nacionalidad, salario);
+            for (int j = 0; j < 10; j++) {
+                int codigoCan = archivoLectura.readInt();
+                String nombreCAn = archivoLectura.readUTF();
+                int anio = archivoLectura.readInt();
+                Disco dis = new Disco(codigoCan, nombreCAn, anio);
+                cantante.agregarDisco(dis);
+            }
             listaCantantes.add(cantante);
         }
 

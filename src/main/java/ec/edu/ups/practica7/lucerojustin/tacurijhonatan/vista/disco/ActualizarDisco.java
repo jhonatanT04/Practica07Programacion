@@ -391,7 +391,7 @@ public class ActualizarDisco extends javax.swing.JInternalFrame {
         if (txtAnioLanzamiento4.getText().isEmpty()||txtNombreDisco4.getText().isEmpty()||txtCodigo4.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.nosehanllenado")); 
         }else{
-            Disco disquito = new Disco(Integer.parseInt(txtCodigo4.getText()), txtNombreDisco4.getText(), Integer.parseInt(txtAnioLanzamiento4.getText()));
+            Disco disquito = new Disco(Integer.parseInt(txtCodigo4.getText()), this.llenarEspacio(txtNombreDisco4.getText()), Integer.parseInt(txtAnioLanzamiento4.getText()));
             cantanteTempo.actualizarDisco(disquito);
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.seactualizo")); 
             txtNombreDisco4.setText("");
@@ -425,6 +425,16 @@ public class ActualizarDisco extends javax.swing.JInternalFrame {
         txtApellido4.setText(cantante.getApellido());
         
     }
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
+    }
+    
+    
     
     private void bntCancelar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelar4ActionPerformed
         // TODO add your handling code here:
