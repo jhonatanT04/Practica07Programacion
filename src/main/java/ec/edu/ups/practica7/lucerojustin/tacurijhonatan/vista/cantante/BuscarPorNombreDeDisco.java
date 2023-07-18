@@ -20,7 +20,7 @@ public class BuscarPorNombreDeDisco extends javax.swing.JInternalFrame {
     private ControladorCantante controladorCantante;
     private Cantante cantanteTempo;
     private ResourceBundle mensajes;
-    //vales vrg gei
+    //comentario
     /**
      * Creates new form BuscarPorNombreDeDisco
      */
