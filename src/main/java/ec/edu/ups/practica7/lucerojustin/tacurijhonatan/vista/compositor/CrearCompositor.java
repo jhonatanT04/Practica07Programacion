@@ -259,13 +259,19 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
                 String nacionalidad = txtNacionalidad.getText();
                 double salario = Double.parseDouble(txtSalario.getText());
                 int numeroComposiciones = Integer.parseInt(txtNumeroComposiciones.getText());
-                Compositor compositor = new Compositor(numeroComposiciones, id, nombre, apellido, edad, nacionalidad, salario);
-                //Disco disco = new Disco(12, "La noche", 2000);
-                //cantante.agregarDisco(disco);
-                controladorCompositor.crearCompositor(compositor); 
-                this.limpiarCampos();
-                JOptionPane.showMessageDialog(this, mensajes.getString("joption.secreocompositor"));
-                System.out.println(controladorCompositor.verCompositores());
+                if (nombre.length()>25 || apellido.length()>25||nacionalidad.length()>25) {
+                        JOptionPane.showMessageDialog(this, "El nombre o apellido es muy largo debe ser menor a 25");
+                    }else{
+                        Compositor compositor = new Compositor(numeroComposiciones, id, nombre, apellido, edad, nacionalidad, salario);
+                
+                        //Disco disco = new Disco(12, "La noche", 2000);
+                        //cantante.agregarDisco(disco);
+                        controladorCompositor.crearCompositor(compositor); 
+                        this.limpiarCampos();
+                        JOptionPane.showMessageDialog(this, mensajes.getString("joption.secreocompositor"));
+                        //System.out.println(controladorCompositor.verCompositores());
+                    }
+                
             }else{
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.elid")); 
             }

@@ -305,22 +305,36 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         String nacionalidad = txtNacionalidad.getText();
         double salario = Double.parseDouble(txtSalario.getText());
         int numeroComposiciones = Integer.parseInt(txtNumeroComposiciones.getText());
-        Compositor compositorAc = new Compositor(numeroComposiciones, id, nombre, apellido, edad, nacionalidad, salario);
-        //cantante.setDiscos(listaDiscos);
-        controladorCompositor.actualizarCompositor(compositorAc);
-        this.limpiarCampos();
-        JOptionPane.showMessageDialog(this, mensajes.getString("joption.actualizocompositro")); 
-        System.out.println(controladorCompositor.verCompositores());
-        this.visibilidad(false);
-        btnActualizarCompositor.setEnabled(false);
-        this.limpiarCampos();
-        btnAceptar.setEnabled(true);
+        if (nombre.length()>25 || apellido.length()>25||nacionalidad.length()>25) {
+            JOptionPane.showMessageDialog(this, "El nombre ,apellido o apellido es muy largo debe ser menor a 25");
+        }else{
+            Compositor compositorAc = new Compositor(numeroComposiciones, id, llenarEspacio(nombre), llenarEspacio(apellido), edad, llenarEspacio(nacionalidad), salario);
+            //cantante.setDiscos(listaDiscos);
+            controladorCompositor.actualizarCompositor(compositorAc);
+            this.limpiarCampos();
+            JOptionPane.showMessageDialog(this, mensajes.getString("joption.actualizocompositro")); 
+            System.out.println(controladorCompositor.verCompositores());
+            this.visibilidad(false);
+            btnActualizarCompositor.setEnabled(false);
+            this.limpiarCampos();
+            btnAceptar.setEnabled(true);
+        }
+        
     }//GEN-LAST:event_btnActualizarCompositorActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         this.limpiarCampos();
     }//GEN-LAST:event_formInternalFrameClosing
 
+    
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 25; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
+    }
     
     private void limpiarCampos(){
         txtId.setText("");
