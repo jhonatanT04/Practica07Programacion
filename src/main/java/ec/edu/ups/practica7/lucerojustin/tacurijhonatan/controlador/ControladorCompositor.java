@@ -45,9 +45,9 @@ public class ControladorCompositor {
         return compositorDao.read(codigo);
     }
     
-    /*public Compositor buscarPorTituloCancion(String nombre){
+    public Compositor buscarPorTituloCancion(String nombre){
         return compositorDao.buscarPorTituloDeCancion(nombre);
-    }*/
+    }
     
     public void agregarClienteCan(Compositor compositor, Cantante cantante){
         compositor.agregarClientE(cantante);

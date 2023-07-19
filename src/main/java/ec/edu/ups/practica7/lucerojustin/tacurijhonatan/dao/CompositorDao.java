@@ -6,6 +6,7 @@ package ec.edu.ups.practica7.lucerojustin.tacurijhonatan.dao;
 
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.idao.ICompositorDao;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cancion;
+import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cantante;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Compositor;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Disco;
 import java.io.FileNotFoundException;
@@ -29,7 +30,7 @@ public class CompositorDao implements ICompositorDao{
     //private List<Compositor> listaCompositor;
 
     public CompositorDao() {
-        this.ruta = "C:\\Users\\venot\\OneDrive\\Escritorio\\Carpeta.Practica7\\Cantante.djj";
+        this.ruta = "C:\\Users\\Usuario\\Desktop\\Carpeta7\\compositor.djj";
     }
     
     
@@ -47,14 +48,27 @@ public class CompositorDao implements ICompositorDao{
             archivoEscritura.writeInt(compositor.getNumeroDeComposiciones());
             archivoEscritura.writeDouble(compositor.getSalario());
             List<Cancion> listaCanc = compositor.getCancionesTop100Billboard();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 10 ; i++) {
                  archivoEscritura.writeInt(listaCanc.get(i).getCodigo());
                  archivoEscritura.writeUTF(listaCanc.get(i).getTitulo());
                  archivoEscritura.writeUTF(listaCanc.get(i).getLetra());
                  archivoEscritura.writeDouble(listaCanc.get(i).getTiempoEnMinutos());
             }
-            
-            
+            List<Cantante> listaCantante = compositor.getCliente();
+            for (int i = 0; i < 10; i++) {
+                archivoEscritura.writeInt(listaCantante.get(i).getCodigo());
+                archivoEscritura.writeUTF(listaCantante.get(i).getNombre());
+                archivoEscritura.writeUTF(listaCantante.get(i).getApellido());
+                archivoEscritura.writeInt(listaCantante.get(i).getEdad());
+                archivoEscritura.writeUTF(listaCantante.get(i).getNacionalidad());
+                archivoEscritura.writeUTF(listaCantante.get(i).getNombreArtistico());
+                archivoEscritura.writeUTF(listaCantante.get(i).getGeneroMusical());
+                archivoEscritura.writeInt(listaCantante.get(i).getNumeroDeSencillos());
+                archivoEscritura.writeInt(listaCantante.get(i).getNumeroDeConciertos());
+                archivoEscritura.writeInt(listaCantante.get(i).getNumeroDeGiras());
+                archivoEscritura.writeDouble(listaCantante.get(i).getSalario());
+            }
+            System.out.println(archivoEscritura.length()); 
             archivoEscritura.close();
          }
         catch(FileNotFoundException e){
@@ -192,8 +206,9 @@ public class CompositorDao implements ICompositorDao{
         }
     }
     
-    /*@Override
+    @Override
     public Compositor buscarPorTituloDeCancion(String valor) {
+        List<Compositor> listaCompositor = this.findAll();
         for (Compositor compositor : listaCompositor) { // iteramos sobre cada persona en la lista
             if (compositor instanceof Compositor) { // si la persona es un compositor
                 for (Cancion cancion : compositor.getCancionesTop100Billboard()) { // iteramos sobre las canciones del compositor
@@ -204,7 +219,7 @@ public class CompositorDao implements ICompositorDao{
             }
         }
         return null;
-    }*/
+    }
     
     @Override
     public List<Compositor> findAll() {

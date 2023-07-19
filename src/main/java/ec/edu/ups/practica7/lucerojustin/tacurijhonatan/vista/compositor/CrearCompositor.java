@@ -5,6 +5,8 @@
 package ec.edu.ups.practica7.lucerojustin.tacurijhonatan.vista.compositor;
 
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.controlador.ControladorCompositor;
+import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cancion;
+import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cantante;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Compositor;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -262,8 +264,10 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
                 if (nombre.length()>25 || apellido.length()>25||nacionalidad.length()>25) {
                         JOptionPane.showMessageDialog(this, "El nombre o apellido es muy largo debe ser menor a 25");
                     }else{
-                        Compositor compositor = new Compositor(numeroComposiciones, id, nombre, apellido, edad, nacionalidad, salario);
-                
+                        Compositor compositor = new Compositor(numeroComposiciones, id, llenarEspacio(nombre), llenarEspacio(apellido), edad, llenarEspacio(nacionalidad), salario);
+                        this.agregarCancionesVacias(compositor); 
+                        //Cantante cantante = new Cantante(llenarEspacio(""), llenarEspacio(" "), 0, 0, 0, 0, llenarEspacio(" "), llenarEspacio(" "), 0, llenarEspacio(" "), 0.00);
+                        this.agregarCliente(compositor); 
                         //Disco disco = new Disco(12, "La noche", 2000);
                         //cantante.agregarDisco(disco);
                         controladorCompositor.crearCompositor(compositor); 
@@ -306,6 +310,46 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
         txtNacionalidad.setText("");
         txtSalario.setText("");
         txtNumeroComposiciones.setText("");
+    }
+    
+    public void agregarCancionesVacias(Compositor compositor){
+        for (int i = 0; i < 10; i++) {
+            int codigo = 0;
+            String titulo = "          ";
+            String letra = "          ";
+            double tiempo = 0.00;
+            
+            Cancion cancion = new Cancion(codigo, titulo, letra, tiempo);
+            compositor.agregarCancion(cancion); 
+        }
+    }
+    
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 25; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
+        //f
+    }
+    
+    public void agregarCliente(Compositor compositor){
+        for (int i = 0; i < 10; i++) {
+            int codigo = 0;
+            String nombre = " ";
+            String apellido = " ";
+            int edad = 0;
+            String nacionalidad = " ";
+            double salario = 0.00;
+            String nombreArtistico = " ";
+            String genero = " "; 
+            int numeroSencillos = 0;
+            int numeroConciertos = 0;
+            int numeroGiras = 0;
+            Cantante cantante = new Cantante(nombreArtistico, genero, numeroSencillos, numeroConciertos, numeroGiras, codigo, nombre, apellido, edad, nacionalidad, salario);
+            compositor.agregarClientE(cantante); 
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

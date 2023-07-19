@@ -31,8 +31,8 @@ public class CantanteDao implements ICantanteDao {
 
     public CantanteDao() {
         //listaCantantes = new ArrayList<>();
-        this.ruta = "C:\\Users\\venot\\OneDrive\\Escritorio\\Carpeta.Practica7\\Cantante.djj";
-        //this.ruta = "PON TU RUTA AQUI GEI SI QUIERES PROBAR Y COMENTA MI RUTA"
+        //this.ruta = "C:\\Users\\venot\\OneDrive\\Escritorio\\Carpeta.Practica7\\Cantante.djj";
+        this.ruta = "C:\\Users\\Usuario\\Desktop\\Carpeta7\\cantante.djj";
         
     }
     

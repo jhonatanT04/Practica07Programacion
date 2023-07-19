@@ -527,7 +527,7 @@ public class ActualizarCancion extends javax.swing.JInternalFrame {
         double tiempo = Double.parseDouble(txtDuracionCancion.getText());
         String titulo = txtTitulo.getText();
         String letra = txtLetra.getText();
-        Cancion cancion = new Cancion(codigo, titulo, letra, tiempo);
+        Cancion cancion = new Cancion(codigo, llenarEspacio(titulo), llenarEspacio(letra), tiempo);
         controladorCompositor.actualizarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), cancion); 
         txtCodigoCancion.setEnabled(true);
         txtDuracionCancion.setEnabled(false);
@@ -561,7 +561,14 @@ public class ActualizarCancion extends javax.swing.JInternalFrame {
         txtNumeroComposiciones.setText("");
     }
     
-   
+   private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
+    }
     
     private void limpiarCamposCancion(){
         txtCodigoCancion.setText("");

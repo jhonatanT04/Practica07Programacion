@@ -7,6 +7,7 @@ package ec.edu.ups.practica7.lucerojustin.tacurijhonatan.vista.cancion;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.controlador.ControladorCompositor;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cancion;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Compositor;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
@@ -20,6 +21,7 @@ import javax.swing.border.Border;
 public class AgregarCancion extends javax.swing.JInternalFrame {
     private ControladorCompositor controladorCompositor;
     private ResourceBundle mensajes;
+    private Compositor compositor;
 
     /**
      * Creates new form AgregarCancion
@@ -464,16 +466,32 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
         if(this.validacionDeCampos()){
             int codigo = Integer.parseInt(txtCodigoCancion.getText());
             if (controladorCompositor.buscarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())),codigo)==null) {
-                String titulo = txtTitulo.getText();
+                if(codigo!=0){
+                   String titulo = txtTitulo.getText();
                 String letra = txtLetra.getText();
                 double tiempo = Double.parseDouble(txtDuracionCancion.getText());
         
                 Cancion cancion = new Cancion(codigo, titulo, letra, tiempo);
-                controladorCompositor.agregarCancion(cancion, controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())));
-                System.out.println(controladorCompositor.verCompositores());
-                JOptionPane.showMessageDialog(this, mensajes.getString("joption.seagrego"));
-                this.limpiarCampos();
-                this.limpiarCamposCancion();
+                boolean noEspacio = false;
+                List<Cancion> listaCanciones = compositor.getCancionesTop100Billboard();
+                    for (int i = 0; i < listaCanciones.size(); i++) {
+                        if(listaCanciones.get(i).getCodigo()==0){
+                            System.out.println("Numero de i: "+i);
+                            listaCanciones.set(i, cancion);
+                            noEspacio = true;
+                            break;
+                        }
+                    }
+                    if(noEspacio){
+                        System.out.println("Lista de canciones: " + listaCanciones);
+                        compositor.setCancionesTop100Billboard(listaCanciones);
+                        controladorCompositor.actualizarCompositor(compositor);
+                        JOptionPane.showMessageDialog(this, mensajes.getString("joption.seagrego"));
+                        this.limpiarCampos();
+                        this.limpiarCamposCancion();
+                    }
+                }
+                
             }else{
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.lacancionyaexsite")); 
             }
@@ -481,6 +499,7 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.nosehanllenado")); 
         }
+
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
