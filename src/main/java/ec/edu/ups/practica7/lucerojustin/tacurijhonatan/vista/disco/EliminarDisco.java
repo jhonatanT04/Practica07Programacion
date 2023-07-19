@@ -319,6 +319,7 @@ public class EliminarDisco extends javax.swing.JInternalFrame {
                 bntBuscar4.setEnabled(false);
                 bntBuscarDisco.setEnabled(true);
                 txtCodigo4.setEnabled(true);
+                controladorCantante.actualizar(cantanteTempo);
 
             }else{
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.noexiste"));
