@@ -160,15 +160,15 @@ public class CompositorDao implements ICompositorDao{
         try{
             archivito = new RandomAccessFile(ruta, "rw");
 
-            int bytesPorCantante = 363;
-            long numCantantes = archivito.length() / bytesPorCantante;
+            int bytesPorCompositor = 363;
+            long numCantantes = archivito.length() / bytesPorCompositor;
 
             for (int i = 0; i < numCantantes; i++) {
-                archivito.seek(i * bytesPorCantante);
+                archivito.seek(i * bytesPorCompositor);
                 int codigoCantante = archivito.readInt();
-                if (codigoCantante == cantante.getCodigo()) {
-                    long posicionActual = i * bytesPorCantante;
-                    long posicionSiguiente = (i + 1) * bytesPorCantante;
+                if (codigoCantante == compostior.getCodigo()) {
+                    long posicionActual = i * bytesPorCompositor;
+                    long posicionSiguiente = (i + 1) * bytesPorCompositor;
                     long bytesRestantes = archivito.length() - posicionSiguiente;
 
                     byte[] buffer = new byte[(int) bytesRestantes];
@@ -176,7 +176,7 @@ public class CompositorDao implements ICompositorDao{
 
                     archivito.seek(posicionActual);
                     archivito.write(buffer);
-                    archivito.setLength(archivito.length() - bytesPorCantante);
+                    archivito.setLength(archivito.length() - bytesPorCompositor);
                     archivito.close();
                     return; 
                 }
@@ -192,7 +192,7 @@ public class CompositorDao implements ICompositorDao{
         }
     }
     
-    @Override
+    /*@Override
     public Compositor buscarPorTituloDeCancion(String valor) {
         for (Compositor compositor : listaCompositor) { // iteramos sobre cada persona en la lista
             if (compositor instanceof Compositor) { // si la persona es un compositor
@@ -204,11 +204,48 @@ public class CompositorDao implements ICompositorDao{
             }
         }
         return null;
-    }
+    }*/
     
     @Override
     public List<Compositor> findAll() {
-        return listaCompositor;
+        List<Compositor> listaCompositores = new ArrayList<>();
+    try {
+        RandomAccessFile archivoLectura = new RandomAccessFile(ruta, "r");
+        int bytesPorCompositor = 363 ;
+        long numCantantes = archivoLectura.length() / bytesPorCompositor;
+        System.out.println(numCantantes);
+        for (int i = 0; i < numCantantes; i++) {
+            archivoLectura.seek(i * bytesPorCompositor);
+            int codigo = archivoLectura.readInt();
+            
+            String nombre = archivoLectura.readUTF();
+            String apellido = archivoLectura.readUTF();
+            int edad = archivoLectura.readInt();
+            String nacionalidad = archivoLectura.readUTF();
+            int numeroComposiciones = archivoLectura.readInt();
+            double salario = archivoLectura.readDouble();
+            Compositor compositor = new Compositor(numeroComposiciones, codigo, nombre, apellido, edad, nacionalidad, salario);
+            for (int j = 0; j < 10; j++) {
+                int codigoc = archivoLectura.readInt();
+                String titulo = archivoLectura.readUTF();
+                String letra = archivoLectura.readUTF();
+                double timepo = archivoLectura.readDouble();
+                Cancion cancion = new Cancion(codigoc, titulo, letra, timepo);
+                compositor.agregarCancion(cancion); 
+            }
+            listaCompositores.add(compositor); 
+        }
+
+        archivoLectura.close();
+    } catch (FileNotFoundException e) {
+        System.out.println("Ruta no encontrada");
+    } catch (IOException e1) {
+        System.out.println("Error de Lectura");
+    } catch (Exception e) {
+        System.out.println("Error General");
+    }
+
+    return listaCompositores;
     }
     
 }

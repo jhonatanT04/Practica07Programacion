@@ -17,7 +17,7 @@ public interface ICompositorDao {
     public Compositor read(int codigo);
     public void update(Compositor compositor);
     public void delete(Compositor compostior);   
-    public Compositor buscarPorTituloDeCancion(String valor);
+    //public Compositor buscarPorTituloDeCancion(String valor);
     public List<Compositor> findAll();
     
 }
