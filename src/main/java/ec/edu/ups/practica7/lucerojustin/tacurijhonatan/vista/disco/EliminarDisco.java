@@ -395,6 +395,7 @@ public class EliminarDisco extends javax.swing.JInternalFrame {
         int num = JOptionPane.showConfirmDialog(this, mensajes.getString("joption.eliminardisco")+ disco.getNombre()); 
         if (num == JOptionPane.YES_OPTION) {
             cantanteTempo.eliminarDisco(Integer.parseInt(txtCodigo4.getText()));
+            controladorCantante.actualizar(cantanteTempo);
             bntEliminar.setEnabled(false);
             bntBuscarDisco.setEnabled(true);
             txtCodigo4.setEnabled(true);

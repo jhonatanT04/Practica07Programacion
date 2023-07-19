@@ -306,6 +306,7 @@ public class CrearCantante extends javax.swing.JInternalFrame {
         }
         System.out.println("Espacio del caracter :" + nueva.length());
         return nueva.toString();
+        //f
     }
     public void agregarDiscosVacios(Cantante can){
         for (int i = 0; i < 10; i++) {

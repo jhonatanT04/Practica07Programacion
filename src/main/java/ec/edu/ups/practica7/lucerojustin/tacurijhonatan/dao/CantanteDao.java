@@ -60,8 +60,6 @@ public class CantanteDao implements ICantanteDao {
                  archivoEscritura.writeUTF(listaDisc.get(i).getNombre());
                  archivoEscritura.writeInt(listaDisc.get(i).getAnioDeLanzamiento());
             }
-            
-            
             archivoEscritura.close();
          }
         catch(FileNotFoundException e){
@@ -155,9 +153,8 @@ public class CantanteDao implements ICantanteDao {
                     archivo.close();
                     return; 
             }
-        }
+        }archivo.close();
 
-        archivo.close();
         //System.out.println("No ser encontr cantante");
         } catch (FileNotFoundException e) {
             System.out.println("Ruta no encontrada");

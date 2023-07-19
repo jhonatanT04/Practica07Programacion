@@ -92,7 +92,7 @@ public class Cantante extends Persona { // Define la clase Cantante, que extiend
     }
 
     public void eliminarDisco(int codigoDisco) {
-        StringBuffer nombreDisc = new StringBuffer(" ");
+        StringBuffer nombreDisc = new StringBuffer("");
         for (int i = 0; i < 10; i++) {
             nombreDisc.append(" ");
         }
@@ -106,12 +106,19 @@ public class Cantante extends Persona { // Define la clase Cantante, que extiend
 
         //if (discoAEliminar != null) {
             //discografia.remove(discoAEliminar);
-            Disco disc = new Disco(0, nombreDisc.toString(), 0);
+            /*Disco disc = new Disco(0, nombreDisc.toString(), 0);
             for (int i = 0; i < discografia.size(); i++) {
                 if (discografia.get(i).getCodigo()== codigoDisco) {
                     discografia.set(i, disc);
                 }
-            }
+            }*/
+            for (Disco disco : discografia) {
+                if (disco.getCodigo()==codigoDisco) {
+                    disco.setCodigo(0);
+                    disco.setNombre(nombreDisc.toString());
+                    disco.setAnioDeLanzamiento(0);
+                }
+        }
             
             
             System.out.println("Disco eliminado correctamente.");
