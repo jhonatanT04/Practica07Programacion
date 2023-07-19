@@ -354,13 +354,27 @@ public class BuscarPorNombreDeDisco extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         if (txtNombreDisco.getText().isEmpty()) {
+            
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.nollenoelnombre")); 
         }else{
-            cantanteTempo = controladorCantante.buscarporDisco(txtNombreDisco.getText());
+            String disco = this.llenarEspacio(txtNombreDisco.getText());
+            cantanteTempo = controladorCantante.buscarporDisco(disco);
+            
             if (cantanteTempo!=null) {
-                
+                txtID.setText(String.valueOf(cantanteTempo.getCodigo()));
+                txtNombre.setText(cantanteTempo.getNombre());
+                txtApellido.setText(cantanteTempo.getApellido());
+                txtEdad.setText( String.valueOf(cantanteTempo.getEdad()));
+                txtNacionalidad.setText(cantanteTempo.getNacionalidad());
+                txtNacionalidad.setText(cantanteTempo.getNacionalidad());
+                txtSalario.setText(String.valueOf(cantanteTempo.calcularSalario()));
+                txtNombreArtistico.setText(cantanteTempo.getNombreArtistico());
+                txtGeneroMusical.setText(cantanteTempo.getGeneroMusical());
+                txtNumeroSencillos.setText(String.valueOf( cantanteTempo.getNumeroDeSencillos()));
+                txtNumeroConciertos.setText(String.valueOf(cantanteTempo.getNumeroDeConciertos()));
+                txtNumeroGiras.setText(String.valueOf(cantanteTempo.getNumeroDeGiras()));
             }else{
-                JOptionPane.showConfirmDialog(this,mensajes.getString("joption.elnombrenoexiste")); 
+                JOptionPane.showMessageDialog(this,mensajes.getString("joption.elnombrenoexiste")); 
                 this.limpiarCampos();
             }
         }
@@ -371,7 +385,6 @@ public class BuscarPorNombreDeDisco extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void limpiarCampos(){
-        
         txtNombre.setText("");
         txtApellido.setText("");
         txtEdad.setText("");
@@ -383,7 +396,14 @@ public class BuscarPorNombreDeDisco extends javax.swing.JInternalFrame {
         txtNumeroGiras.setText("");
         txtGeneroMusical.setText(""); 
     }
-    
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

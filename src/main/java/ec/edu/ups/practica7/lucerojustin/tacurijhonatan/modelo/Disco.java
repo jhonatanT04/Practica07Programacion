@@ -78,7 +78,7 @@ public class Disco {
 
     @Override
     public String toString() {
-        return "\nDisco: " + "Codigo: " + codigo + "Nombre: " + nombre + "AnioDeLanzamiento: " + anioDeLanzamiento + '}'; // retorna una cadena de caracteres con la información del disco
+        return "\nDisco: " + "Codigo: " + codigo + "Nombre: -" + nombre + "-AnioDeLanzamiento: " + anioDeLanzamiento + '}'; // retorna una cadena de caracteres con la información del disco
     }
 }
 

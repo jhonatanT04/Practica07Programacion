@@ -205,8 +205,9 @@ public class CantanteDao implements ICantanteDao {
         }
     }
     
-    /*@Override
+    @Override
     public Cantante buscarPorNombreDeDisco(String valor) {
+        List <Cantante> listaCantantes = this.findAll();
         for(Cantante cantante : listaCantantes){
             if(cantante instanceof Cantante){
                 for(Disco disco : cantante.getDiscos()){
@@ -217,7 +218,7 @@ public class CantanteDao implements ICantanteDao {
             }
         }
         return null;
-    }*/
+    }
 
     @Override
     public List<Cantante> findAll() {

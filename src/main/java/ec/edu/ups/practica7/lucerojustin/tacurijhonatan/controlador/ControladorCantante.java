@@ -64,9 +64,9 @@ public class ControladorCantante {
         
     }
     
-    //public Cantante buscarporDisco(String nombre){
-      //  return cantanteDao.buscarPorNombreDeDisco(nombre);
-    //}
+    public Cantante buscarporDisco(String nombre){
+        return cantanteDao.buscarPorNombreDeDisco(nombre);
+    }
     
     public void eliminarDisco(Cantante cantante,int codigo){
         List<Disco> listaDiscos=cantante.getDiscos();

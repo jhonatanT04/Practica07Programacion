@@ -17,6 +17,6 @@ public interface ICantanteDao {
     public Cantante read(int id);
     public void update(Cantante cantante);
     public void delete(Cantante cantante);  
-    //public Cantante buscarPorNombreDeDisco(String valor);
+    public Cantante buscarPorNombreDeDisco(String valor);
     public List<Cantante> findAll();
 }

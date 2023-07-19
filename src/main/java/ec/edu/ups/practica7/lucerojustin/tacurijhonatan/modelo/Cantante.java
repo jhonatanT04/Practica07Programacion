@@ -92,6 +92,10 @@ public class Cantante extends Persona { // Define la clase Cantante, que extiend
     }
 
     public void eliminarDisco(int codigoDisco) {
+        StringBuffer nombreDisc = new StringBuffer(" ");
+        for (int i = 0; i < 10; i++) {
+            nombreDisc.append(" ");
+        }
         Disco discoAEliminar = null;
         for (Disco disco : discografia) {
             if (disco.getCodigo() == codigoDisco) {
@@ -101,7 +105,15 @@ public class Cantante extends Persona { // Define la clase Cantante, que extiend
         }
 
         if (discoAEliminar != null) {
-            discografia.remove(discoAEliminar);
+            //discografia.remove(discoAEliminar);
+            Disco disc = new Disco(0, nombreDisc.toString(), 0);
+            for (int i = 0; i < 10; i++) {
+                if (discografia.get(i).getCodigo()== codigoDisco) {
+                    discografia.set(codigoDisco, disc);
+                }
+            }
+            
+            
             System.out.println("Disco eliminado correctamente.");
         } else {
             System.out.println("El disco con el código especificado no se encontró en la discografía.");
