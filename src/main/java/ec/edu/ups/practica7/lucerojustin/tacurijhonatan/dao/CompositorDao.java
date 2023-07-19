@@ -7,6 +7,10 @@ package ec.edu.ups.practica7.lucerojustin.tacurijhonatan.dao;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.idao.ICompositorDao;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cancion;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Compositor;
+import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Disco;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,50 +21,174 @@ import java.util.List;
  */
 public class CompositorDao implements ICompositorDao{
     
-    private List<Compositor> listaCompositor;
+    private String ruta;
+    private RandomAccessFile archivoEscritura;
+    
+    private RandomAccessFile archivoLectura;
+    private RandomAccessFile archivito;
+    //private List<Compositor> listaCompositor;
 
     public CompositorDao() {
-        listaCompositor = new ArrayList<>();
+        this.ruta = "C:\\Users\\venot\\OneDrive\\Escritorio\\Carpeta.Practica7\\Cantante.djj";
     }
     
     
 
     @Override
     public void create(Compositor compositor) {
-        listaCompositor.add(compositor);
+        try {
+            archivoEscritura = new RandomAccessFile(ruta, "rw");
+            archivoEscritura.seek(archivoEscritura.length());
+            archivoEscritura.writeInt(compositor.getCodigo());
+            archivoEscritura.writeUTF(compositor.getNombre());
+            archivoEscritura.writeUTF(compositor.getApellido());
+            archivoEscritura.writeInt(compositor.getEdad());
+            archivoEscritura.writeUTF(compositor.getNacionalidad());
+            archivoEscritura.writeInt(compositor.getNumeroDeComposiciones());
+            archivoEscritura.writeDouble(compositor.getSalario());
+            List<Cancion> listaCanc = compositor.getCancionesTop100Billboard();
+            for (int i = 0; i < 10; i++) {
+                 archivoEscritura.writeInt(listaCanc.get(i).getCodigo());
+                 archivoEscritura.writeUTF(listaCanc.get(i).getTitulo());
+                 archivoEscritura.writeUTF(listaCanc.get(i).getLetra());
+                 archivoEscritura.writeDouble(listaCanc.get(i).getTiempoEnMinutos());
+            }
+            
+            
+            archivoEscritura.close();
+         }
+        catch(FileNotFoundException e){
+            System.out.println("Ruta no ecncontrada");
+        } catch(IOException e1){
+            System.out.println("Error de Escritura");
+        }
+        catch (Exception e) {
+            System.out.println("Error General");
+        }
     }
 
     @Override
     public Compositor read(int codigo) {
-        for (Compositor compositor : listaCompositor) {
-            if (compositor.getCodigo()==(codigo)) {
-                return compositor;
-                
+        try {
+            archivoLectura = new RandomAccessFile(ruta, "r");
+            int bytesPorCantante = 363;
+            long numCantantes = archivoLectura.length() / bytesPorCantante;
+
+            for (int i = 0; i < numCantantes; i++) {
+                archivoLectura.seek(i * bytesPorCantante);
+                int codigoCantante = archivoLectura.readInt();
+
+                if (codigoCantante == codigo) {
+                    String nombre = archivoLectura.readUTF();
+                    String apellido = archivoLectura.readUTF();
+                    int edad = archivoLectura.readInt();
+                    String nacionalidad = archivoLectura.readUTF();
+                    int numeroComposiciones = archivoLectura.readInt();
+                    double salario = archivoLectura.readDouble();
+                    Compositor compositor = new Compositor(numeroComposiciones, codigo, nombre, apellido, edad, nacionalidad, salario);
+                    for (int j = 0; i < 10; i++) {
+                        int codigoComp = archivoLectura.readInt();
+                        String titulo = archivoLectura.readUTF();
+                        String letra = archivoLectura.readUTF();
+                        double tiempo = archivoLectura.readDouble();
+                        Cancion cancion = new Cancion(codigoComp, titulo, letra,tiempo );
+                        compositor.agregarCancion(cancion); 
+                        
+                    }
+                    archivoLectura.close();
+
+                    return compositor ;
             }
         }
-        return null;
+        archivoLectura.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Ruta no encontrada");
+        } catch (IOException e1) {
+            System.out.println("Error de Lectura");
+        } catch (Exception e) {
+            System.out.println("Error General");
+    }
+
+    return null; 
     }
 
     @Override
     public void update(Compositor compositor) {
-        for (int i = 0; i < listaCompositor.size(); i++) {
-            Compositor c = listaCompositor.get(i);
-            if (c.getCodigo() == compositor.getCodigo()) {
-                listaCompositor.set(i, compositor);
-                break;
+        try {
+            RandomAccessFile archivo = new RandomAccessFile(ruta, "rw");
+            int bytesPorCompositor = 363 ;
+            long numCompositores = archivo.length() / bytesPorCompositor;
+            for (int i = 0; i < numCompositores; i++) {
+                archivo.seek(i * bytesPorCompositor);
+                int codigoCompositor = archivo.readInt();
+                if (codigoCompositor == compositor.getCodigo()) {
+                    //archivo.writeInt(cantante.getCodigo());
+                    archivo.writeUTF(compositor.getNombre());
+                    archivo.writeUTF(compositor.getApellido());
+                    archivo.writeInt(compositor.getEdad());
+                    archivo.writeUTF(compositor.getNacionalidad());
+                    archivo.writeInt(compositor.getNumeroDeComposiciones());
+                    archivo.writeDouble(compositor.getSalario());
+                    List<Cancion> listaCanc = compositor.getCancionesTop100Billboard();
+                    System.out.println("Lista del update = "+ listaCanc.toString());
+                    for (int j = 0; i < listaCanc.size(); j++) {
+                        archivo.writeInt(listaCanc.get(j).getCodigo());
+                        archivo.writeUTF(listaCanc.get(j).getTitulo());
+                        archivo.writeUTF(listaCanc.get(j).getLetra());
+                        archivo.writeDouble(listaCanc.get(j).getTiempoEnMinutos());
+                        
+                    }
+                    
+                    archivo.close();
+                    return; 
             }
+        }
+
+        archivo.close();
+        //System.out.println("No ser encontr cantante");
+        } catch (FileNotFoundException e) {
+            System.out.println("Ruta no encontrada");
+            } catch (IOException e1) {
+                System.out.println("Error de Lectura");
+            } catch (Exception e) {
+                System.out.println("Error General");
         }
     }
 
     @Override
     public void delete(Compositor compostior) {
-        Iterator<Compositor> it = listaCompositor.iterator();
-        while (it.hasNext()) {
-            Compositor e = it.next();
-            if (e.getNombre()== compostior.getNombre()) {
-                it.remove();
-                break;
+        try{
+            archivito = new RandomAccessFile(ruta, "rw");
+
+            int bytesPorCantante = 363;
+            long numCantantes = archivito.length() / bytesPorCantante;
+
+            for (int i = 0; i < numCantantes; i++) {
+                archivito.seek(i * bytesPorCantante);
+                int codigoCantante = archivito.readInt();
+                if (codigoCantante == cantante.getCodigo()) {
+                    long posicionActual = i * bytesPorCantante;
+                    long posicionSiguiente = (i + 1) * bytesPorCantante;
+                    long bytesRestantes = archivito.length() - posicionSiguiente;
+
+                    byte[] buffer = new byte[(int) bytesRestantes];
+                    archivito.read(buffer);
+
+                    archivito.seek(posicionActual);
+                    archivito.write(buffer);
+                    archivito.setLength(archivito.length() - bytesPorCantante);
+                    archivito.close();
+                    return; 
+                }
             }
+            archivito.close();
+            //System.out.println("No Existe el codgo");
+        }catch (FileNotFoundException e) {
+            System.out.println("Ruta no encontrada");
+        } catch (IOException e1) {
+            System.out.println("Error de Lectura/Escritura");
+        } catch (Exception e) {
+            System.out.println("Error General");
         }
     }
     
