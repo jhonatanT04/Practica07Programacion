@@ -100,7 +100,7 @@ public class CompositorDao implements ICompositorDao{
                     int numeroComposiciones = archivoLectura.readInt();
                     double salario = archivoLectura.readDouble();
                     Compositor compositor = new Compositor(numeroComposiciones, codigo, nombre, apellido, edad, nacionalidad, salario);
-                    for (int j = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
                         int codigoComp = archivoLectura.readInt();
                         String titulo = archivoLectura.readUTF();
                         String letra = archivoLectura.readUTF();
@@ -109,6 +109,7 @@ public class CompositorDao implements ICompositorDao{
                         compositor.agregarCancion(cancion); 
                         
                     }
+                    System.out.println("");
                     archivoLectura.close();
 
                     return compositor ;
