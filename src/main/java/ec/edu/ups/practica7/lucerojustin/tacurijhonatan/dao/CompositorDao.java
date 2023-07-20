@@ -281,6 +281,22 @@ public class CompositorDao implements ICompositorDao{
                 Cancion cancion = new Cancion(codigoc, titulo, letra, timepo);
                 compositor.agregarCancion(cancion); 
             }
+            
+            for (int j = 0; j < 10; j++) {
+                int codigoCan = archivoEscritura.readInt();
+                String nombreCan = archivoLectura.readUTF();
+                String apellidoCan = archivoLectura.readUTF();
+                int edadCan = archivoLectura.readInt();
+                String nacionalidadCan = archivoLectura.readUTF();
+                String nombreARCan = archivoLectura.readUTF();
+                String generoMusical = archivoLectura.readUTF();
+                int numeroSencillos = archivoLectura.readInt();
+                int numeroConciertos = archivoLectura.readInt();
+                int numeroGiras = archivoLectura.readInt();
+                double salarioCan = archivoLectura.readDouble();
+                Cantante cantante = new Cantante(nombreARCan, generoMusical, numeroSencillos, numeroConciertos, numeroGiras, codigoCan, nombreCan, apellidoCan, edadCan, nacionalidadCan, salarioCan);
+                compositor.agregarClientE(cantante); 
+            }
             listaCompositores.add(compositor); 
         }
 
