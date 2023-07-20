@@ -85,7 +85,7 @@ public class CompositorDao implements ICompositorDao{
     public Compositor read(int codigo) {
         try {
             archivoLectura = new RandomAccessFile(ruta, "r");
-            int bytesPorCantante = 2091;
+            int bytesPorCantante = 2241;
             long numCantantes = archivoLectura.length() / bytesPorCantante;
 
             for (int i = 0; i < numCantantes; i++) {
@@ -130,7 +130,7 @@ public class CompositorDao implements ICompositorDao{
     public void update(Compositor compositor) {
         try {
             RandomAccessFile archivo = new RandomAccessFile(ruta, "rw");
-            int bytesPorCompositor = 2091 ;
+            int bytesPorCompositor = 2241 ;
             long numCompositores = archivo.length() / bytesPorCompositor;
             for (int i = 0; i < numCompositores; i++) {
                 archivo.seek(i * bytesPorCompositor);
@@ -174,7 +174,7 @@ public class CompositorDao implements ICompositorDao{
         try{
             archivito = new RandomAccessFile(ruta, "rw");
 
-            int bytesPorCompositor = 363;
+            int bytesPorCompositor = 2241;
             long numCantantes = archivito.length() / bytesPorCompositor;
 
             for (int i = 0; i < numCantantes; i++) {
@@ -226,7 +226,7 @@ public class CompositorDao implements ICompositorDao{
         List<Compositor> listaCompositores = new ArrayList<>();
     try {
         RandomAccessFile archivoLectura = new RandomAccessFile(ruta, "r");
-        int bytesPorCompositor = 363 ;
+        int bytesPorCompositor = 2241 ;
         long numCantantes = archivoLectura.length() / bytesPorCompositor;
         System.out.println(numCantantes);
         for (int i = 0; i < numCantantes; i++) {

@@ -314,12 +314,12 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
     
     public void agregarCancionesVacias(Compositor compositor){
         for (int i = 0; i < 10; i++) {
-            int codigo = 0;
+            /*int codigo = 0;
             String titulo = "          ";
             String letra = "          ";
-            double tiempo = 0.00;
+            double tiempo = 0.00;*/
             
-            Cancion cancion = new Cancion(codigo, titulo, letra, tiempo);
+            Cancion cancion = new Cancion(0, llenarEspacio(""), llenarEspacio(""), 0.00);
             compositor.agregarCancion(cancion); 
         }
     }
@@ -331,23 +331,22 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
         }
         System.out.println("Espacio del caracter :" + nueva.length());
         return nueva.toString();
-        //f
+        
+    }
+    
+    private String llenarGeneroMusica(String pa){
+        StringBuilder nueva = new StringBuilder(pa);
+        for (int i = pa.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
     }
     
     public void agregarCliente(Compositor compositor){
         for (int i = 0; i < 10; i++) {
-            //int codigo = 0;
-            //String nombre = "";
-            //String apellido = "";
-            //int edad = 0;
-            //String nacionalidad = "";
-            //double salario = 0.00;
-            //String nombreArtistico = "";
-            //String genero = ""; 
-            //int numeroSencillos = 0;
-            //int numeroConciertos = 0;
-            //int numeroGiras = 0;
-            Cantante cantante = new Cantante(llenarEspacio(""), llenarEspacio(""), 0, 0, 0, 0, llenarEspacio(""), llenarEspacio(""), 0, llenarEspacio(""), 0); 
+            
+            Cantante cantante = new Cantante(llenarEspacio(""), llenarGeneroMusica(""), 0, 0, 0, 0, llenarEspacio(""), llenarEspacio(""), 0, llenarEspacio(""), 0.00); 
             compositor.agregarClientE(cantante); 
         }
     }
