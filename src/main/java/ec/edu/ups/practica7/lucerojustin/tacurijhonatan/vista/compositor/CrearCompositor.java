@@ -336,18 +336,18 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
     
     public void agregarCliente(Compositor compositor){
         for (int i = 0; i < 10; i++) {
-            int codigo = 0;
-            String nombre = " ";
-            String apellido = " ";
-            int edad = 0;
-            String nacionalidad = " ";
-            double salario = 0.00;
-            String nombreArtistico = " ";
-            String genero = " "; 
-            int numeroSencillos = 0;
-            int numeroConciertos = 0;
-            int numeroGiras = 0;
-            Cantante cantante = new Cantante(nombreArtistico, genero, numeroSencillos, numeroConciertos, numeroGiras, codigo, nombre, apellido, edad, nacionalidad, salario);
+            //int codigo = 0;
+            //String nombre = "";
+            //String apellido = "";
+            //int edad = 0;
+            //String nacionalidad = "";
+            //double salario = 0.00;
+            //String nombreArtistico = "";
+            //String genero = ""; 
+            //int numeroSencillos = 0;
+            //int numeroConciertos = 0;
+            //int numeroGiras = 0;
+            Cantante cantante = new Cantante(llenarEspacio(""), llenarEspacio(""), 0, 0, 0, 0, llenarEspacio(""), llenarEspacio(""), 0, llenarEspacio(""), 0); 
             compositor.agregarClientE(cantante); 
         }
     }

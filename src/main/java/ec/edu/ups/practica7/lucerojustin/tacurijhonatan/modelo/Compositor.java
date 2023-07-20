@@ -105,14 +105,23 @@ public class Compositor extends Persona {
     
 
     public void eliminarCancion(int codigoCancion) {
+        StringBuffer nombreCan = new StringBuffer("");
+        for (int i = 0; i < 10; i++) {
+            nombreCan.append(" ");
+        }
+        
         for (Cancion cancion : cancionesTop100Billboard) {
             if (cancion.getCodigo() == codigoCancion) {
-                cancionesTop100Billboard.remove(cancion);
-                System.out.println("Canción eliminada correctamente.");
-                return;
+                cancion.setCodigo(0);
+                cancion.setLetra(nombreCan.toString());
+                cancion.setTitulo(nombreCan.toString());
+                cancion.setTiempoEnMinutos(0.00); 
+               
             }
         }
-        System.out.println("El código de canción no se encontró en el top 100 de Billboard.");
+        
+        System.out.println("Canción eliminada correctamente.");
+        
     }
 
 
