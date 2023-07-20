@@ -109,7 +109,24 @@ public class CompositorDao implements ICompositorDao{
                         compositor.agregarCancion(cancion); 
                         
                     }
-                    System.out.println("");
+                    
+                    
+                    for (int j = 0; j < 10; j++) {
+                        int codigoCan = archivoEscritura.readInt();
+                        String nombreCan = archivoLectura.readUTF();
+                        String apellidoCan = archivoLectura.readUTF();
+                        int edadCan = archivoLectura.readInt();
+                        String nacionalidadCan = archivoLectura.readUTF();
+                        String nombreARCan = archivoLectura.readUTF();
+                        String generoMusical = archivoLectura.readUTF();
+                        int numeroSencillos = archivoLectura.readInt();
+                        int numeroConciertos = archivoLectura.readInt();
+                        int numeroGiras = archivoLectura.readInt();
+                        double salarioCan = archivoLectura.readDouble();
+                        Cantante cantante = new Cantante(nombreARCan, generoMusical, numeroSencillos, numeroConciertos, numeroGiras, codigoCan, nombreCan, apellidoCan, edadCan, nacionalidadCan, salarioCan);
+                        compositor.agregarClientE(cantante); 
+                    }
+                    
                     archivoLectura.close();
 
                     return compositor ;
@@ -152,6 +169,21 @@ public class CompositorDao implements ICompositorDao{
                         archivo.writeUTF(listaCanc.get(j).getLetra());
                         archivo.writeDouble(listaCanc.get(j).getTiempoEnMinutos());
                         
+                    }
+                    
+                    List<Cantante> listaCantante = compositor.getCliente();
+                    for (int j = 0; j < 10; j++) {
+                        archivo.writeInt(listaCantante.get(i).getCodigo());
+                        archivo.writeUTF(listaCantante.get(i).getNombre());
+                        archivo.writeUTF(listaCantante.get(i).getApellido());
+                        archivo.writeInt(listaCantante.get(i).getEdad());
+                        archivo.writeUTF(listaCantante.get(i).getNacionalidad());
+                        archivo.writeUTF(listaCantante.get(i).getNombreArtistico());
+                        archivo.writeUTF(listaCantante.get(i).getGeneroMusical());
+                        archivo.writeInt(listaCantante.get(i).getNumeroDeSencillos());
+                        archivo.writeInt(listaCantante.get(i).getNumeroDeConciertos());
+                        archivo.writeInt(listaCantante.get(i).getNumeroDeGiras());
+                        archivo.writeDouble(listaCantante.get(i).getSalario());
                     }
                     
                     archivo.close();
