@@ -33,7 +33,7 @@ public class CantanteDao implements ICantanteDao {
 
     public CantanteDao() {
         //listaCantantes = new ArrayList<>();
-        this.ruta = "\\Practica7-LuceroJustin-TacuriJhonatan\\src\\main\\resources\\Rutas";
+        this.ruta = "src\\cantante.djj";
         //this.ruta = "C:\\Users\\Usuario\\Desktop\\Carpeta7\\cantante.djj";
         
         
