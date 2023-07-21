@@ -17,6 +17,7 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -24,6 +25,7 @@ import java.util.List;
  */
 public class CantanteDao implements ICantanteDao {
     private String ruta;
+   
     private RandomAccessFile archivoEscritura;
     //private List<Cantante> listaCantantes;
     private RandomAccessFile archivoLectura;
@@ -31,7 +33,7 @@ public class CantanteDao implements ICantanteDao {
 
     public CantanteDao() {
         //listaCantantes = new ArrayList<>();
-        //this.ruta = "C:\\Users\\venot\\OneDrive\\Escritorio\\Carpeta.Practica7\\Cantante.djj";
+        this.ruta = "\\Practica7-LuceroJustin-TacuriJhonatan\\src\\main\\resources\\Rutas";
         //this.ruta = "C:\\Users\\Usuario\\Desktop\\Carpeta7\\cantante.djj";
         
         
