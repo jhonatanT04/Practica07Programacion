@@ -30,7 +30,7 @@ public class CompositorDao implements ICompositorDao{
     //private List<Compositor> listaCompositor;
 
     public CompositorDao() {
-        this.ruta = "src\\main\\resources\\rutas\\compositor    .djj";
+        this.ruta = "src\\main\\resources\\rutas\\compositor.djj";
     }
     
     
@@ -109,7 +109,6 @@ public class CompositorDao implements ICompositorDao{
                         compositor.agregarCancion(cancion); 
                         
                     }
-                    
                     
                     for (int j = 0; j < 10; j++) {
                         int codigoCan = archivoEscritura.readInt();

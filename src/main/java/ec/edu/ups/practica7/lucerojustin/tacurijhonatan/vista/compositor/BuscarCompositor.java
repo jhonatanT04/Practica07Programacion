@@ -6,6 +6,7 @@ package ec.edu.ups.practica7.lucerojustin.tacurijhonatan.vista.compositor;
 
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.controlador.ControladorCompositor;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cancion;
+import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cantante;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Compositor;
 import java.util.List;
 import java.util.Locale;
@@ -87,6 +88,8 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCancion = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblCanatntes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
@@ -221,22 +224,38 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblCancion);
 
         jpanelA.add(jScrollPane1);
-        jScrollPane1.setBounds(410, 30, 430, 320);
+        jScrollPane1.setBounds(410, 30, 440, 320);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Imgen.jpg"))); // NOI18N
         jLabel1.setToolTipText("");
         jpanelA.add(jLabel1);
-        jLabel1.setBounds(10, 16, 860, 360);
+        jLabel1.setBounds(10, 16, 860, 350);
+
+        tblCanatntes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Apellido", "Edad", "Nacionalida", "Salario", "Artistico", "Genero", "Número de Sencillos", "Numero de Conciertos", "Numero de Giras"
+            }
+        ));
+        jScrollPane3.setViewportView(tblCanatntes);
+
+        jpanelA.add(jScrollPane3);
+        jScrollPane3.setBounds(410, 370, 452, 402);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpanelA, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
+            .addComponent(jpanelA, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpanelA, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+            .addComponent(jpanelA, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
         );
 
         pack();
@@ -284,6 +303,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
                 txtSalario.setText(String.valueOf(compositorTempo.calcularSalario()));
                 txtNumeroComposiciones.setText(String.valueOf(compositorTempo.getNumeroDeComposiciones()));
                 this.actualizarTabla();
+                this.actualizarTablaClientes();
             }else{
                 this.limpiarCampos();
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.noexiste")); 
@@ -298,6 +318,8 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         this.setVisible(false);
         DefaultTableModel modelo = (DefaultTableModel)this.tblCancion.getModel();
         modelo.setNumRows(0);
+        DefaultTableModel modelo1 = (DefaultTableModel)this.tblCanatntes.getModel();
+        modelo1.setNumRows(0);
         this.tblCancion.setModel(modelo);
     }//GEN-LAST:event_btnCancelarActionPerformed
     private void actualizarTabla(){
@@ -311,6 +333,32 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
                 String letra= listaCa.getLetra();
                 double duracion = listaCa.getTiempoEnMinutos();
                 Object[] rowDate = {cod,nom,letra,duracion};
+                modelo.addRow(rowDate);
+            }
+            this.tblCancion.setModel(modelo);
+        //}else{
+          //  JOptionPane.showMessageDialog(this, "No se ha ingresado ningun cantante aun");
+        //}
+    }
+    
+    private void actualizarTablaClientes(){
+        DefaultTableModel modelo = (DefaultTableModel)this.tblCanatntes.getModel();
+        modelo.setNumRows(0);
+        List <Cantante> listaCantantes = compositorTempo.getCliente();
+        //if (listaPersonas!=null) {
+            for (Cantante listaCantan : listaCantantes) {
+                int id = listaCantan.getCodigo();
+                String nombre = listaCantan.getNombre();
+                String apellido = listaCantan.getApellido();
+                int edad = listaCantan.getEdad();
+                String nacionalidad = listaCantan.getNacionalidad();
+                double salario = Math.round(listaCantan.calcularSalario()*100.0)/100.0;
+                String nombreArtistico = listaCantan.getNombreArtistico();
+                String genero = listaCantan.getGeneroMusical();
+                int numeroSencillos = listaCantan.getNumeroDeSencillos();
+                int numeroConciertos =listaCantan.getNumeroDeConciertos();
+                int numeroGiras = listaCantan.getNumeroDeGiras();
+                Object[] rowDate = {id,nombre,apellido,edad,nacionalidad,salario,nombreArtistico,genero,numeroSencillos,numeroConciertos,numeroGiras};
                 modelo.addRow(rowDate);
             }
             this.tblCancion.setModel(modelo);
@@ -334,6 +382,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel jblApellidoBuscarCompositor;
     private javax.swing.JLabel jblEdadBuscarCompositor;
     private javax.swing.JLabel jblIdBuscarCompositor;
@@ -342,6 +391,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jblNumeroComposiconesBuscarCompositor;
     private javax.swing.JLabel jblSalarioBuscarCompositor;
     private javax.swing.JPanel jpanelA;
+    private javax.swing.JTable tblCanatntes;
     private javax.swing.JTable tblCancion;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtEdad;
