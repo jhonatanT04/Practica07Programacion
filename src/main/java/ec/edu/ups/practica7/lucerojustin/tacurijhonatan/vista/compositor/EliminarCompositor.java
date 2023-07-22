@@ -19,6 +19,7 @@ import javax.swing.border.Border;
 public class EliminarCompositor extends javax.swing.JInternalFrame {
     private ControladorCompositor controladorCompositor;
     private ResourceBundle mensajes;
+    private Compositor compositorTempo;
     /**
      * Creates new form EliminarCompositor
      */
@@ -270,7 +271,7 @@ public class EliminarCompositor extends javax.swing.JInternalFrame {
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
-            Compositor compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
+            compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
             if (compositorTempo !=null) {
                 txtNombre.setText(compositorTempo.getNombre());
                 txtApellido.setText(compositorTempo.getApellido());
@@ -297,7 +298,7 @@ public class EliminarCompositor extends javax.swing.JInternalFrame {
     private void btnEliminarCompositorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCompositorActionPerformed
         int respuesta=JOptionPane.showConfirmDialog(this, mensajes.getString("joption.preguntaeliminarcompo")); 
         if (respuesta==JOptionPane.YES_OPTION) {
-            controladorCompositor.elimininarCompo(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())));
+            controladorCompositor.elimininarCompo(compositorTempo);
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.seeliminoelcompo")); 
             txtId.setText("");
             this.limpiarCampos();

@@ -272,7 +272,7 @@ public class BuscarCantante extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
             cantanteTempo = controladorCantante.buscarCantante(Integer.parseInt(txtID.getText()));
-            System.out.println("Cantantes"+controladorCantante.verCantantes());
+            //System.out.println("Cantantes"+controladorCantante.verCantantes());
             
             if (cantanteTempo !=null) {
                 
@@ -281,6 +281,7 @@ public class BuscarCantante extends javax.swing.JInternalFrame {
                 txtEdad.setText( String.valueOf(cantanteTempo.getEdad()));
                 txtNacionalidad.setText(cantanteTempo.getNacionalidad());
                 txtNacionalidad.setText(cantanteTempo.getNacionalidad());
+                System.out.println("Cantante SALARIO VISTA : "+cantanteTempo.getSalario());
                 txtSalario.setText(String.valueOf(cantanteTempo.calcularSalario()));
                 txtNombreArtistico.setText(cantanteTempo.getNombreArtistico());
                 txtGeneroMusical.setText(cantanteTempo.getGeneroMusical());

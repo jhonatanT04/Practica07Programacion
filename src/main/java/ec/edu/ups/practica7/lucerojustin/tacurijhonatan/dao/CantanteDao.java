@@ -58,11 +58,13 @@ public class CantanteDao implements ICantanteDao {
             archivoEscritura.writeInt(cantante.getNumeroDeGiras());
             archivoEscritura.writeDouble(cantante.getSalario());
             List<Disco> listaDisc = cantante.getDiscos();
+             System.out.println(cantante.getSalario());
             for (int i = 0; i < 10; i++) {
                  archivoEscritura.writeInt(listaDisc.get(i).getCodigo());
                  archivoEscritura.writeUTF(listaDisc.get(i).getNombre());
                  archivoEscritura.writeInt(listaDisc.get(i).getAnioDeLanzamiento());
             }
+             System.out.println(archivoEscritura.length());
             archivoEscritura.close();
          }
         catch(FileNotFoundException e){
@@ -99,6 +101,7 @@ public class CantanteDao implements ICantanteDao {
                     int numeroDeGiras = archivoLectura.readInt();
                     double salario = archivoLectura.readDouble();
                     Cantante cantante = new Cantante(nombreArtistico, generoMusical, numeroDeSencillos, numeroDeConciertos, numeroDeGiras, codigo, nombre, apellido, edad, nacionalidad,salario);
+                    System.out.println(salario);
                     for (int j = 0; j < 10; j++) {
                         int codigoCan = archivoLectura.readInt();
                         String nombreCAn = archivoLectura.readUTF();
@@ -179,6 +182,7 @@ public class CantanteDao implements ICantanteDao {
             for (int i = 0; i < numCantantes; i++) {
                 archivito.seek(i * bytesPorCantante);
                 int codigoCantante = archivito.readInt();
+                
                 if (codigoCantante == cantante.getCodigo()) {
                     long posicionActual = i * bytesPorCantante;
                     long posicionSiguiente = (i + 1) * bytesPorCantante;
@@ -195,7 +199,7 @@ public class CantanteDao implements ICantanteDao {
                 }
             }
             archivito.close();
-            //System.out.println("No Existe el codgo");
+            System.out.println("No Existe el codgo");
         }catch (FileNotFoundException e) {
             System.out.println("Ruta no encontrada");
         } catch (IOException e1) {
@@ -227,7 +231,7 @@ public class CantanteDao implements ICantanteDao {
         RandomAccessFile archivoLectura = new RandomAccessFile(ruta, "r");
         int bytesPorCantante = 363 ;
         long numCantantes = archivoLectura.length() / bytesPorCantante;
-        System.out.println(numCantantes);
+        //System.out.println(numCantantes);
         for (int i = 0; i < numCantantes; i++) {
             archivoLectura.seek(i * bytesPorCantante);
             int codigo = archivoLectura.readInt();

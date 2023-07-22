@@ -268,8 +268,7 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
                         this.agregarCancionesVacias(compositor); 
                         //Cantante cantante = new Cantante(llenarEspacio(""), llenarEspacio(" "), 0, 0, 0, 0, llenarEspacio(" "), llenarEspacio(" "), 0, llenarEspacio(" "), 0.00);
                         this.agregarCliente(compositor); 
-                        //Disco disco = new Disco(12, "La noche", 2000);
-                        //cantante.agregarDisco(disco);
+                        
                         controladorCompositor.crearCompositor(compositor); 
                         this.limpiarCampos();
                         JOptionPane.showMessageDialog(this, mensajes.getString("joption.secreocompositor"));
@@ -329,7 +328,7 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
         for (int i = palabra.length(); i < 25; i++) {
             nueva.append(" ");
         }
-        System.out.println("Espacio del caracter :" + nueva.length());
+        //System.out.println("Espacio del caracter :" + nueva.length());
         return nueva.toString();
         
     }
@@ -339,13 +338,12 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
         for (int i = pa.length(); i < 10; i++) {
             nueva.append(" ");
         }
-        System.out.println("Espacio del caracter :" + nueva.length());
+        //System.out.println("Espacio del caracter :" + nueva.length());
         return nueva.toString();
     }
     
     public void agregarCliente(Compositor compositor){
         for (int i = 0; i < 10; i++) {
-            
             Cantante cantante = new Cantante(llenarEspacio(""), llenarGeneroMusica(""), 0, 0, 0, 0, llenarEspacio(""), llenarEspacio(""), 0, llenarEspacio(""), 0.00); 
             compositor.agregarClientE(cantante); 
         }

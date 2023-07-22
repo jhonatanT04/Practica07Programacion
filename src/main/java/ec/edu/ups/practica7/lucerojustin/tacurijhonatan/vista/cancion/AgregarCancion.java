@@ -444,15 +444,15 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
-            Compositor compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
-            if (compositorTempo !=null) {
-                txtNombre.setText(compositorTempo.getNombre());
-                txtApellido.setText(compositorTempo.getApellido());
-                txtEdad.setText( String.valueOf(compositorTempo.getEdad()));
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtSalario.setText(String.valueOf(compositorTempo.calcularSalario()));
-                txtNumeroComposiciones.setText(String.valueOf(compositorTempo.getNumeroDeComposiciones()));
+            compositor = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
+            if (compositor !=null) {
+                txtNombre.setText(compositor.getNombre());
+                txtApellido.setText(compositor.getApellido());
+                txtEdad.setText( String.valueOf(compositor.getEdad()));
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtSalario.setText(String.valueOf(compositor.calcularSalario()));
+                txtNumeroComposiciones.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
 
             }else{
                 this.limpiarCampos();
@@ -484,7 +484,7 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
                         }
                     }
                     if(noespacio){
-                        System.out.println("Lista de canciones" +listaCacion.toString());
+                        
                         compositor.setCancionesTop100Billboard(listaCacion);
                         controladorCompositor.actualizarCompositor(compositor);
                         JOptionPane.showMessageDialog(this, "joption.seacreado");
@@ -497,6 +497,8 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "El codigo debe de ser distinto a cero ");
                 }
+            }else{
+                JOptionPane.showMessageDialog(this,"El Codigo ya existe ");
             }
         }
 
