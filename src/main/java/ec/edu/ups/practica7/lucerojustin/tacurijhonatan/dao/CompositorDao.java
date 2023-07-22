@@ -30,7 +30,7 @@ public class CompositorDao implements ICompositorDao{
     //private List<Compositor> listaCompositor;
 
     public CompositorDao() {
-        this.ruta = "C:\\Users\\Usuario\\Desktop\\Carpeta7\\compositor.djj";
+        this.ruta = "src\\main\\resources\\rutas\\compositor    .djj";
     }
     
     
