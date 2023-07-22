@@ -85,11 +85,11 @@ public class CompositorDao implements ICompositorDao{
     public Compositor read(int codigo) {
         try {
             archivoLectura = new RandomAccessFile(ruta, "r");
-            int bytesPorCantante = 2241;
-            long numCantantes = archivoLectura.length() / bytesPorCantante;
+            int bytesPorCompositor = 2241;
+            long numCompositores = archivoLectura.length() / bytesPorCompositor;
 
-            for (int i = 0; i < numCantantes; i++) {
-                archivoLectura.seek(i * bytesPorCantante);
+            for (int i = 0; i < numCompositores; i++) {
+                archivoLectura.seek(i * bytesPorCompositor);
                 int codigoCantante = archivoLectura.readInt();
 
                 if (codigoCantante == codigo) {
@@ -111,7 +111,7 @@ public class CompositorDao implements ICompositorDao{
                     }
                     
                     for (int j = 0; j < 10; j++) {
-                        int codigoCan = archivoEscritura.readInt();
+                        int codigoCan = archivoLectura.readInt();
                         String nombreCan = archivoLectura.readUTF();
                         String apellidoCan = archivoLectura.readUTF();
                         int edadCan = archivoLectura.readInt();

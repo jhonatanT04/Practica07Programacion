@@ -102,7 +102,7 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
 
         jblIdActualizarCompositor.setText("ID:");
         jpanelA.add(jblIdActualizarCompositor);
-        jblIdActualizarCompositor.setBounds(60, 38, 14, 16);
+        jblIdActualizarCompositor.setBounds(60, 38, 80, 16);
 
         jblNombreActualizarCompositor.setText("Nombre:");
         jpanelA.add(jblNombreActualizarCompositor);
@@ -136,7 +136,6 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         jpanelA.add(txtId);
         txtId.setBounds(212, 35, 131, 22);
 
-        txtNombre.setEditable(false);
         txtNombre.setEnabled(false);
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +145,6 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         jpanelA.add(txtNombre);
         txtNombre.setBounds(212, 64, 131, 22);
 
-        txtApellido.setEditable(false);
         txtApellido.setEnabled(false);
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +154,6 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         jpanelA.add(txtApellido);
         txtApellido.setBounds(212, 98, 131, 22);
 
-        txtEdad.setEditable(false);
         txtEdad.setEnabled(false);
         txtEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +163,6 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         jpanelA.add(txtEdad);
         txtEdad.setBounds(212, 132, 131, 22);
 
-        txtNacionalidad.setEditable(false);
         txtNacionalidad.setEnabled(false);
         txtNacionalidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,7 +172,6 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         jpanelA.add(txtNacionalidad);
         txtNacionalidad.setBounds(212, 166, 131, 22);
 
-        txtSalario.setEditable(false);
         txtSalario.setEnabled(false);
         txtSalario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +181,6 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         jpanelA.add(txtSalario);
         txtSalario.setBounds(212, 206, 131, 22);
 
-        txtNumeroComposiciones.setEditable(false);
         txtNumeroComposiciones.setEnabled(false);
         txtNumeroComposiciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,6 +269,7 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
         }else{
             Compositor compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
             if (compositorTempo !=null) {
+                this.visibilidad(true); 
                 txtNombre.setText(compositorTempo.getNombre());
                 txtApellido.setText(compositorTempo.getApellido());
                 txtEdad.setText( String.valueOf(compositorTempo.getEdad()));
@@ -298,6 +293,7 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnActualizarCompositorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarCompositorActionPerformed
+
         int id = Integer.parseInt(txtId.getText());
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
