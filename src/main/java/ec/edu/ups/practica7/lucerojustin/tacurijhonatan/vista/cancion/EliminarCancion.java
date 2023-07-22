@@ -20,6 +20,8 @@ import javax.swing.border.Border;
 public class EliminarCancion extends javax.swing.JInternalFrame {
     private ControladorCompositor controladorCompositor;
     private ResourceBundle mensajes;
+    private Compositor compositor;
+    private Cancion cancion;
     
     /**
      * Creates new form EliminarCancion
@@ -459,15 +461,15 @@ public class EliminarCancion extends javax.swing.JInternalFrame {
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
-            Compositor compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
-            if (compositorTempo !=null) {
-                txtNombre.setText(compositorTempo.getNombre());
-                txtApellido.setText(compositorTempo.getApellido());
-                txtEdad.setText( String.valueOf(compositorTempo.getEdad()));
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtSalario.setText(String.valueOf(compositorTempo.calcularSalario()));
-                txtNumeroComposiciones.setText(String.valueOf(compositorTempo.getNumeroDeComposiciones()));
+            compositor = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
+            if (compositor !=null) {
+                txtNombre.setText(compositor.getNombre());
+                txtApellido.setText(compositor.getApellido());
+                txtEdad.setText( String.valueOf(compositor.getEdad()));
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtSalario.setText(String.valueOf(compositor.calcularSalario()));
+                txtNumeroComposiciones.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
 
             }else{
                 this.limpiarCampos();
@@ -497,15 +499,15 @@ public class EliminarCancion extends javax.swing.JInternalFrame {
         if(txtCodigoCancion.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestallenocodigo")); 
         }else{
-            Cancion cancion = controladorCompositor.buscarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), Integer.parseInt(txtCodigoCancion.getText()));
+            cancion = compositor.buscarCancione(Integer.parseInt(txtCodigoCancion.getText()));
             if(cancion!=null){
-                txtDuracionCancion.setText(String.valueOf(cancion.getTiempoEnMinutos()));
+                txtDuracionCancion.setText(String.valueOf(cancion.getTiempoEnMinutos()));  
                 txtLetra.setText(cancion.getLetra());
                 txtTitulo.setText(cancion.getTitulo());
             }else{
                 this.limpiarCamposCancion();
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.lacancionnoexiste")); 
-            }
+            }  
         }
 
     }//GEN-LAST:event_btnBuscarCancionActionPerformed
