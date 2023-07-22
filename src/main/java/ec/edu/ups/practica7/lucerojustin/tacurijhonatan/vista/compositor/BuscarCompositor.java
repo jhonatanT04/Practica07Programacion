@@ -304,6 +304,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
                 txtNumeroComposiciones.setText(String.valueOf(compositorTempo.getNumeroDeComposiciones()));
                 this.actualizarTabla();
                 this.actualizarTablaClientes();
+                System.out.println(controladorCompositor.verCompositores());
             }else{
                 this.limpiarCampos();
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.noexiste")); 
@@ -329,11 +330,14 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         //if (listaPersonas!=null) {
             for (Cancion listaCa : listaCan) {
                 int cod = listaCa.getCodigo();
-                String nom = listaCa.getTitulo();
-                String letra= listaCa.getLetra();
-                double duracion = listaCa.getTiempoEnMinutos();
-                Object[] rowDate = {cod,nom,letra,duracion};
-                modelo.addRow(rowDate);
+                if(cod!=0){
+                    String nom = listaCa.getTitulo();
+                    String letra= listaCa.getLetra();
+                    double duracion = listaCa.getTiempoEnMinutos();
+                    Object[] rowDate = {cod,nom,letra,duracion};
+                    modelo.addRow(rowDate);
+                }
+                
             }
             this.tblCancion.setModel(modelo);
         //}else{
@@ -348,18 +352,21 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         //if (listaPersonas!=null) {
             for (Cantante listaCantan : listaCantantes) {
                 int id = listaCantan.getCodigo();
-                String nombre = listaCantan.getNombre();
-                String apellido = listaCantan.getApellido();
-                int edad = listaCantan.getEdad();
-                String nacionalidad = listaCantan.getNacionalidad();
-                double salario = Math.round(listaCantan.calcularSalario()*100.0)/100.0;
-                String nombreArtistico = listaCantan.getNombreArtistico();
-                String genero = listaCantan.getGeneroMusical();
-                int numeroSencillos = listaCantan.getNumeroDeSencillos();
-                int numeroConciertos =listaCantan.getNumeroDeConciertos();
-                int numeroGiras = listaCantan.getNumeroDeGiras();
-                Object[] rowDate = {id,nombre,apellido,edad,nacionalidad,salario,nombreArtistico,genero,numeroSencillos,numeroConciertos,numeroGiras};
-                modelo.addRow(rowDate);
+                if(id!=0){
+                    String nombre = listaCantan.getNombre();
+                    String apellido = listaCantan.getApellido();
+                    int edad = listaCantan.getEdad();
+                    String nacionalidad = listaCantan.getNacionalidad();
+                    double salario = Math.round(listaCantan.calcularSalario()*100.0)/100.0;
+                    String nombreArtistico = listaCantan.getNombreArtistico();
+                    String genero = listaCantan.getGeneroMusical();
+                    int numeroSencillos = listaCantan.getNumeroDeSencillos();
+                    int numeroConciertos =listaCantan.getNumeroDeConciertos();
+                    int numeroGiras = listaCantan.getNumeroDeGiras();
+                    Object[] rowDate = {id,nombre,apellido,edad,nacionalidad,salario,nombreArtistico,genero,numeroSencillos,numeroConciertos,numeroGiras};
+                    modelo.addRow(rowDate);
+                }
+                
             }
             this.tblCancion.setModel(modelo);
         //}else{

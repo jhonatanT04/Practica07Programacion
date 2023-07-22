@@ -23,9 +23,9 @@ import java.util.List;
 public class CompositorDao implements ICompositorDao{
     
     private String ruta;
-    //private RandomAccessFile archivoEscritura;
+    private RandomAccessFile archivoEscritura;
     
-    //private RandomAccessFile archivoLectura;
+   private RandomAccessFile archivoLectura;
     //private RandomAccessFile archivito;
     //private List<Compositor> listaCompositor;
 
@@ -38,7 +38,7 @@ public class CompositorDao implements ICompositorDao{
     @Override
     public void create(Compositor compositor) {
         try {
-            RandomAccessFile archivoEscritura = new RandomAccessFile(ruta, "rw");
+            archivoEscritura = new RandomAccessFile(ruta, "rw");
             archivoEscritura.seek(archivoEscritura.length());
             
             archivoEscritura.writeInt(compositor.getCodigo());
@@ -85,7 +85,7 @@ public class CompositorDao implements ICompositorDao{
     @Override
     public Compositor read(int codigo) {
         try {
-            RandomAccessFile archivoLectura = new RandomAccessFile(ruta, "r");
+            archivoLectura = new RandomAccessFile(ruta, "r");
             int bytesPorCompositor = 1941;
             long numCompositores = archivoLectura.length() / bytesPorCompositor;
 

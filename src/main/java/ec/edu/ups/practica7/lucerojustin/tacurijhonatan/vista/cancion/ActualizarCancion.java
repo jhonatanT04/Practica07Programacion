@@ -20,6 +20,7 @@ import javax.swing.border.Border;
 public class ActualizarCancion extends javax.swing.JInternalFrame {
     private ControladorCompositor controladorCompositor;
     private ResourceBundle mensajes;
+    private Compositor compositor;
     
     /**
      * Creates new form ActualizarCancion
@@ -468,15 +469,15 @@ public class ActualizarCancion extends javax.swing.JInternalFrame {
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno"));
         }else{
-            Compositor compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
-            if (compositorTempo !=null) {
-                txtNombre.setText(compositorTempo.getNombre());
-                txtApellido.setText(compositorTempo.getApellido());
-                txtEdad.setText( String.valueOf(compositorTempo.getEdad()));
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtSalario.setText(String.valueOf(compositorTempo.calcularSalario()));
-                txtNumeroComposiciones.setText(String.valueOf(compositorTempo.getNumeroDeComposiciones()));
+            compositor = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
+            if (compositor !=null) {
+                txtNombre.setText(compositor.getNombre());
+                txtApellido.setText(compositor.getApellido());
+                txtEdad.setText( String.valueOf(compositor.getEdad()));
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtSalario.setText(String.valueOf(compositor.calcularSalario()));
+                txtNumeroComposiciones.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
 
             }else{
                 this.limpiarCampos();
@@ -506,7 +507,7 @@ public class ActualizarCancion extends javax.swing.JInternalFrame {
         if(txtCodigoCancion.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
-            Cancion cancion = controladorCompositor.buscarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), Integer.parseInt(txtCodigoCancion.getText())); 
+            Cancion cancion = compositor.buscarCancione(Integer.parseInt(txtCodigoCancion.getText())); 
             if(cancion!=null){
                 txtDuracionCancion.setText(String.valueOf(cancion.getTiempoEnMinutos()));  
                 txtLetra.setText(cancion.getLetra());
@@ -523,21 +524,21 @@ public class ActualizarCancion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarCancionActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        int codigo = Integer.parseInt(txtCodigoCancion.getText());
-        double tiempo = Double.parseDouble(txtDuracionCancion.getText());
-        String titulo = txtTitulo.getText();
-        String letra = txtLetra.getText();
-        Cancion cancion = new Cancion(codigo, llenarEspacio(titulo), llenarEspacio(letra), tiempo);
-        controladorCompositor.actualizarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), cancion); 
-        txtCodigoCancion.setEnabled(true);
-        txtDuracionCancion.setEnabled(false);
-        txtLetra.setEnabled(false);
-        txtTitulo.setEnabled(false);
-        JOptionPane.showMessageDialog(this, mensajes.getString("joption.seactualizo")); 
-        System.out.println(controladorCompositor.verCompositores());
+        if(txtCodigoCancion.getText().isEmpty()||txtDuracionCancion.getText().isEmpty()||txtLetra.getText().isEmpty()||txtTitulo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, mensajes.getString("joption.nosehanllenado")); 
+        }else{
+            Cancion cancion = new Cancion(Integer.parseInt(txtCodigoCancion.getText()), llenarEspacio(txtTitulo.getText()), llenarEspacio(txtLetra.getText()), Double.parseDouble(txtDuracionCancion.getText()));
+            compositor.actualizarCancion(cancion); 
+            txtCodigoCancion.setEnabled(true);
+            txtDuracionCancion.setEnabled(false);
+            txtLetra.setEnabled(false);
+            txtTitulo.setEnabled(false);
+            JOptionPane.showMessageDialog(this, mensajes.getString("joption.seactualizo")); 
+            System.out.println(compositor);
+            this.limpiarCampos();
+            this.limpiarCamposCancion();
+        }
         
-        this.limpiarCampos();
-        this.limpiarCamposCancion();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
