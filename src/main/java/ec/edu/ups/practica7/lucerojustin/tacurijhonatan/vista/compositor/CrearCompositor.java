@@ -314,12 +314,12 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
     
     public void agregarCancionesVacias(Compositor compositor){
         for (int i = 0; i < 10; i++) {
-            /*int codigo = 0;
+            int codigo = 0;
             String titulo = "          ";
             String letra = "          ";
-            double tiempo = 0.00;*/
-            
-            Cancion cancion = new Cancion(0, llenarEspacio(""), llenarEspacio(""), 0.00);
+            double tiempo = 0.00;
+            Cancion cancion = new Cancion(codigo, titulo, letra, tiempo);
+            //Cancion cancion = new Cancion(0, llenarEspacio(""), llenarEspacio(""), 0.00);
             compositor.agregarCancion(cancion); 
         }
     }

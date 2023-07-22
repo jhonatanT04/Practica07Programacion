@@ -463,41 +463,41 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        if(this.validacionDeCampos()){
+        if (txtCodigoCancion.getText().isEmpty()||txtDuracionCancion.getText().isEmpty()||txtLetra.getText().isEmpty()||txtTitulo.getText().isEmpty()||txtNacionalidad.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "joption.nosehanllenado");
+        }else{
             int codigo = Integer.parseInt(txtCodigoCancion.getText());
-            if (controladorCompositor.buscarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())),codigo)==null) {
+            if(compositor.buscarCancione(codigo)==null){
                 if(codigo!=0){
-                   String titulo = txtTitulo.getText();
-                String letra = txtLetra.getText();
-                double tiempo = Double.parseDouble(txtDuracionCancion.getText());
-        
-                Cancion cancion = new Cancion(codigo, titulo, letra, tiempo);
-                boolean noEspacio = false;
-                List<Cancion> listaCanciones = compositor.getCancionesTop100Billboard();
-                    for (int i = 0; i < listaCanciones.size(); i++) {
-                        if(listaCanciones.get(i).getCodigo()==0){
-                            System.out.println("Numero de i: "+i);
-                            listaCanciones.set(i, cancion);
-                            noEspacio = true;
+                    String titulo = txtTitulo.getText();
+                    String letra = txtLetra.getText();
+                    double tiempo = Double.parseDouble(txtDuracionCancion.getText());
+                    Cancion cancion = new Cancion(codigo, llenarEspacio(titulo), llenarEspacio(letra), tiempo);
+                    List<Cancion>listaCacion = compositor.getCancionesTop100Billboard();
+                    boolean noespacio = false;
+                    for (int i = 0; i < listaCacion.size(); i++) {
+                        if(listaCacion.get(i).getCodigo()==0){
+                            System.out.println("Numero de i" +i);
+                            listaCacion.set(i, cancion);
+                            noespacio = true;
                             break;
                         }
                     }
-                    if(noEspacio){
-                        System.out.println("Lista de canciones: " + listaCanciones);
-                        compositor.setCancionesTop100Billboard(listaCanciones);
+                    if(noespacio){
+                        System.out.println("Lista de canciones" +listaCacion.toString());
+                        compositor.setCancionesTop100Billboard(listaCacion);
                         controladorCompositor.actualizarCompositor(compositor);
-                        JOptionPane.showMessageDialog(this, mensajes.getString("joption.seagrego"));
+                        JOptionPane.showMessageDialog(this, "joption.seacreado");
                         this.limpiarCampos();
                         this.limpiarCamposCancion();
+                        System.out.println(compositor);
+                    }else{
+                        JOptionPane.showMessageDialog(this, "No existe mas espacio");
                     }
+                }else{
+                    JOptionPane.showMessageDialog(this, "El codigo debe de ser distinto a cero ");
                 }
-                
-            }else{
-                JOptionPane.showMessageDialog(this, mensajes.getString("joption.lacancionyaexsite")); 
             }
-                
-        }else{
-            JOptionPane.showMessageDialog(this, mensajes.getString("joption.nosehanllenado")); 
         }
 
         
@@ -536,6 +536,15 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
             return false;
         }
         return true;
+    }
+    
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
