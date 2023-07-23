@@ -87,12 +87,12 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCancion = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCanatntes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
+        jpanelA.setBackground(new java.awt.Color(240, 192, 118));
         jpanelA.setBorder(javax.swing.BorderFactory.createTitledBorder("BUSCAR COMPOSITOR"));
         jpanelA.setLayout(null);
 
@@ -225,11 +225,6 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
 
         jpanelA.add(jScrollPane1);
         jScrollPane1.setBounds(410, 30, 440, 320);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Imgen.jpg"))); // NOI18N
-        jLabel1.setToolTipText("");
-        jpanelA.add(jLabel1);
-        jLabel1.setBounds(10, 16, 860, 350);
 
         tblCanatntes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -389,7 +384,6 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel jblApellidoBuscarCompositor;

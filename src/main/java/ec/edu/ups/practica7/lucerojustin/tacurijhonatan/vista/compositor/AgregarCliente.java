@@ -158,10 +158,10 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        jpanelA.setBackground(new java.awt.Color(242, 129, 64));
+        jpanelA.setBackground(new java.awt.Color(240, 192, 118));
         jpanelA.setBorder(javax.swing.BorderFactory.createTitledBorder("AGREGAR CLIENTE"));
 
-        jpanelB.setBackground(new java.awt.Color(153, 79, 51));
+        jpanelB.setBackground(new java.awt.Color(240, 192, 118));
         jpanelB.setBorder(javax.swing.BorderFactory.createTitledBorder("BUSCAR COMPOSITOR"));
 
         jblIdCoAgregarCliente.setText("ID:");
@@ -304,7 +304,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jpanelC.setBackground(new java.awt.Color(164, 54, 19));
+        jpanelC.setBackground(new java.awt.Color(240, 192, 118));
         jpanelC.setBorder(javax.swing.BorderFactory.createTitledBorder("BUSCAR CANTANTE"));
 
         jblIdCaAgregarCliente.setText("ID:");
