@@ -464,7 +464,7 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         if (txtCodigoCancion.getText().isEmpty()||txtDuracionCancion.getText().isEmpty()||txtLetra.getText().isEmpty()||txtTitulo.getText().isEmpty()||txtNacionalidad.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "joption.nosehanllenado");
+            JOptionPane.showMessageDialog(this, mensajes.getString("joption.nosehanllenado"));
         }else{
             int codigo = Integer.parseInt(txtCodigoCancion.getText());
             if(compositor.buscarCancione(codigo)==null){
@@ -487,7 +487,7 @@ public class AgregarCancion extends javax.swing.JInternalFrame {
                         
                         compositor.setCancionesTop100Billboard(listaCacion);
                         controladorCompositor.actualizarCompositor(compositor);
-                        JOptionPane.showMessageDialog(this, "joption.seacreado");
+                        JOptionPane.showMessageDialog(this, mensajes.getString("joption.seacreado"));
                         this.limpiarCampos();
                         this.limpiarCamposCancion();
                         System.out.println(compositor);
