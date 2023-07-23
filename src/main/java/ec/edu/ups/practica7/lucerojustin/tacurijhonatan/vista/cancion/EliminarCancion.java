@@ -522,7 +522,9 @@ public class EliminarCancion extends javax.swing.JInternalFrame {
         
         int respuesta=JOptionPane.showConfirmDialog(this, mensajes.getString("joption.eliminarcancion")); 
         if (respuesta==JOptionPane.YES_OPTION) {
-            controladorCompositor.eliminarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), Integer.parseInt(txtCodigoCancion.getText())); 
+            compositor.eliminarCancion(Integer.parseInt(txtCodigoCancion.getText()));
+            controladorCompositor.actualizarCompositor(compositor);
+            //controladorCompositor.eliminarCancion(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), Integer.parseInt(txtCodigoCancion.getText())); 
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.seeliminolacancion")); 
             this.limpiarCamposCancion();
             this.limpiarCampos();

@@ -529,6 +529,7 @@ public class ActualizarCancion extends javax.swing.JInternalFrame {
         }else{
             Cancion cancion = new Cancion(Integer.parseInt(txtCodigoCancion.getText()), llenarEspacio(txtTitulo.getText()), llenarEspacio(txtLetra.getText()), Double.parseDouble(txtDuracionCancion.getText()));
             compositor.actualizarCancion(cancion); 
+            controladorCompositor.actualizarCompositor(compositor); 
             txtCodigoCancion.setEnabled(true);
             txtDuracionCancion.setEnabled(false);
             txtLetra.setEnabled(false);

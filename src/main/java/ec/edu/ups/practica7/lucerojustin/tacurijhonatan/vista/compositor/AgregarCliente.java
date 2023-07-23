@@ -603,6 +603,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 if(id!=0){
                   Cantante cliente = new Cantante(llenarEspacio(txtNombreArtistico.getText()), llenarEspacioGenero(txtGeneroMusical.getText()), Integer.parseInt(txtNumeroSencillos.getText()), Integer.parseInt(txtNumeroConciertos.getText()), Integer.parseInt(txtNumeroGiras.getText()), Integer.parseInt(txtID.getText()),
                     llenarEspacio(txtNombre1.getText()) , llenarEspacio(txtApellido1.getText()), Integer.parseInt(txtEdad1.getText()), llenarEspacio(txtNacionalidad1.getText()), Double.parseDouble(txtSalario1.getText())); 
+                compositorTempo.agregarClientE(cliente); 
                 List<Cantante> listaClientes = compositorTempo.getCliente();
                 boolean noEspacio = false;
                 for (int i = 0; i < listaClientes.size(); i++) {
