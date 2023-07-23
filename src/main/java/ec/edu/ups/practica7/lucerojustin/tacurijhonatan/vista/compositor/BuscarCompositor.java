@@ -296,14 +296,16 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
             compositor = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
             if (compositor !=null) {
                 txtNombre.setText(compositor.getNombre());
+                System.out.println("------------------------------------");
+                System.out.println(compositor.getCancionesTop100Billboard());
                 txtApellido.setText(compositor.getApellido());
                 txtEdad.setText( String.valueOf(compositor.getEdad()));
                 txtNacionalidad.setText(compositor.getNacionalidad());
                 txtNacionalidad.setText(compositor.getNacionalidad());
                 txtSalario.setText(String.valueOf(compositor.calcularSalario()));
                 txtNumeroComposiciones.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
-                this.actualizarTabla();
-                this.actualizarTablaClientes();
+                this.actualizarTabla(compositor.getCancionesTop100Billboard());
+                this.actualizarTablaClientes(compositor.getCliente());
                 System.out.println(controladorCompositor.verCompositores());
             }else{
                 this.limpiarCampos();
@@ -323,10 +325,10 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         modelo1.setNumRows(0);
         this.tblCancion.setModel(modelo);
     }//GEN-LAST:event_btnCancelarActionPerformed
-    private void actualizarTabla(){
+    private void actualizarTabla(List<Cancion> listaCan ){
         DefaultTableModel modelo = (DefaultTableModel)this.tblCancion.getModel();
         modelo.setNumRows(0);
-        List<Cancion> listaCan = compositor.getCancionesTop100Billboard();
+       
         //if (listaPersonas!=null) {
             for (Cancion listaCa : listaCan) {
                 int cod = listaCa.getCodigo();
@@ -345,10 +347,10 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         //}
     }
     
-    private void actualizarTablaClientes(){
+    private void actualizarTablaClientes( List<Cantante> listaCantantes){
         DefaultTableModel modelo = (DefaultTableModel)this.tblCanatntes.getModel();
         modelo.setNumRows(0);
-        List<Cantante> listaCantantes = compositor.getCliente();
+        
         //if (listaPersonas!=null) {
             for (Cantante listaCantan : listaCantantes) {
                 int id = listaCantan.getCodigo();
@@ -368,7 +370,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
                 }
                 
             }
-            this.tblCancion.setModel(modelo);
+            this.tblCanatntes.setModel(modelo);
         //}else{
           //  JOptionPane.showMessageDialog(this, "No se ha ingresado ningun cantante aun");
         //}
