@@ -330,10 +330,14 @@ public class AgregarDisco extends javax.swing.JInternalFrame {
         }else{
             int codigo = Integer.parseInt( txtCodigo.getText());
             if (cantanteTempo.buscarDisco(codigo)==null) {
+                if (txtNombreDisco.getText().length()>10) {
+                    JOptionPane.showMessageDialog(this, "Es muy largo el nombre ");
+                }
+                else{
                 if (codigo!=0) {
                     String nombre =txtNombreDisco.getText();
-                int anio = Integer.parseInt( txtAnioLanzamiento.getText());
-                Disco disco = new Disco(codigo, this.llenarEspacio(nombre), anio);
+                    int anio = Integer.parseInt( txtAnioLanzamiento.getText());
+                    Disco disco = new Disco(codigo, this.llenarEspacio(nombre), anio);
                 List<Disco>listaDiscos = cantanteTempo.getDiscos();
                 boolean noEspacio =false;
                 System.out.println("Discos vacios "+listaDiscos.toString());
@@ -363,6 +367,7 @@ public class AgregarDisco extends javax.swing.JInternalFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "El codigo debe de ser distinto a cero ");
                 }
+            }
                 
         }else{
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.elid")); 

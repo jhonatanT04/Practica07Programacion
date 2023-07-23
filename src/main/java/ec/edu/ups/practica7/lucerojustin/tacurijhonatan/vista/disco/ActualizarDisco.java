@@ -391,6 +391,9 @@ public class ActualizarDisco extends javax.swing.JInternalFrame {
         if (txtAnioLanzamiento4.getText().isEmpty()||txtNombreDisco4.getText().isEmpty()||txtCodigo4.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.nosehanllenado")); 
         }else{
+            if (txtNombreDisco4.getText().length()>10) {
+                JOptionPane.showMessageDialog(this, "El nombre es muy extenso");
+            }else{
             Disco disquito = new Disco(Integer.parseInt(txtCodigo4.getText()), this.llenarEspacio(txtNombreDisco4.getText()), Integer.parseInt(txtAnioLanzamiento4.getText()));
             cantanteTempo.actualizarDisco(disquito);
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.seactualizo")); 
@@ -401,7 +404,9 @@ public class ActualizarDisco extends javax.swing.JInternalFrame {
             txtAnioLanzamiento4.setEnabled(false);
             txtCodigo4.setEnabled(true);
             bntActualizar.setEnabled(false);
-            System.out.println(cantanteTempo);
+            controladorCantante.actualizar(cantanteTempo);
+            //System.out.println(cantanteTempo);
+            }
         }
     }//GEN-LAST:event_bntActualizarActionPerformed
     

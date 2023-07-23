@@ -578,7 +578,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 txtNumeroSencillos.setText(String.valueOf(cantanteTempo.getNumeroDeSencillos()));
                 txtNumeroConciertos.setText(String.valueOf(cantanteTempo.getNumeroDeConciertos()));
                 txtNumeroGiras.setText(String.valueOf(cantanteTempo.getNumeroDeGiras()));
-
+                
             }else{
                 this.limpiarCamposCantante();
                 JOptionPane.showMessageDialog(this, mensajes.getString("joption.noexiste"));
@@ -599,38 +599,35 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.camposnollenos")); 
         }else{
             int id = Integer.parseInt(txtID.getText()); 
-            if(compositorTempo.buscarCliente(id) == null){
+            //if(compositorTempo.buscarCliente(id) == null){
                 if(id!=0){
-                  Cantante cliente = new Cantante(llenarEspacio(txtNombreArtistico.getText()), llenarEspacioGenero(txtGeneroMusical.getText()), Integer.parseInt(txtNumeroSencillos.getText()), Integer.parseInt(txtNumeroConciertos.getText()), Integer.parseInt(txtNumeroGiras.getText()), Integer.parseInt(txtID.getText()),
-                    llenarEspacio(txtNombre1.getText()) , llenarEspacio(txtApellido1.getText()), Integer.parseInt(txtEdad1.getText()), llenarEspacio(txtNacionalidad1.getText()), Double.parseDouble(txtSalario1.getText())); 
-                compositorTempo.agregarClientE(cliente); 
-                List<Cantante> listaClientes = compositorTempo.getCliente();
-                boolean noEspacio = false;
-                for (int i = 0; i < listaClientes.size(); i++) {
-                    if(listaClientes.get(i).getCodigo() ==0 ){
-                        listaClientes.set(i, cliente);
-                        noEspacio=true;
-                        break;
+                    Cantante cliente = new Cantante(txtNombreArtistico.getText(), txtGeneroMusical.getText(), Integer.parseInt(txtNumeroSencillos.getText()), Integer.parseInt(txtNumeroConciertos.getText()), Integer.parseInt(txtNumeroGiras.getText()), Integer.parseInt(txtID.getText()),txtNombre1.getText() , txtApellido1.getText(), Integer.parseInt(txtEdad1.getText()), txtNacionalidad1.getText(), Double.parseDouble(txtSalario1.getText())); 
+                    //compositorTempo.agregarClientE(cliente); 
+                    
+                    //System.out.println("-------------------------------\n"+cliente+"---------------------");
+                    List<Cantante> listaClientes = compositorTempo.getCliente();
+                    boolean noEspacio = false;
+                    for (int i = 0; i < listaClientes.size(); i++) {
+                        if(listaClientes.get(i).getCodigo() ==0 ){
+                            listaClientes.set(i, cliente);
+                            noEspacio=true;
+                            break;
+                        }
                     }
-                }
-                if(noEspacio){
-                    compositorTempo.setCliente(listaClientes);
-                    controladorCompositor.actualizarCompositor(compositorTempo); 
-            //compositorTempo.agregarClientE(cantanteTempo);
-            //controladorCompositor.agregarClienteCan(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), controladorCantante.buscarCantante(Integer.parseInt(txtID.getText()))); 
-                    JOptionPane.showMessageDialog(this, mensajes.getString("joption.seagregolciente")); 
-                    System.out.println(controladorCompositor.verCompositores());
-                    this.limpiarCampos();
-                    this.limpiarCamposCantante();
-                }else{
-                    JOptionPane.showMessageDialog(this, "No existe mas espacio");
+                    //System.out.println("Lista de clientes :--------------------------------------------\n "+ compositorTempo.getCliente());
+                    if(noEspacio){
+                        compositorTempo.setCliente(listaClientes);
+                        controladorCompositor.actualizarCompositor(compositorTempo);
+                        JOptionPane.showMessageDialog(this, mensajes.getString("joption.seagregolciente")); 
+                   
+                        this.limpiarCampos();
+                        this.limpiarCamposCantante();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "No existe mas espacio");
 
-                }   
+                    }   
                 }
-                
-            }
-            
-            
+            //}
         }
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
