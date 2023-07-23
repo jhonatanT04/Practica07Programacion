@@ -89,6 +89,15 @@ public class Compositor extends Persona {
         cliente.add(clientes); // Se agrega el cantante a la lista de clientes del compositor
     }
     
+    public Cantante buscarCliente(int id){
+        for (Cantante can : cliente) {
+            if(can.getCodigo() == id){
+                return can;
+            }
+        }
+        return null;
+    }
+    
     public void actualizarCancion(Cancion cancionActualizada) {
         int codigoCancion = cancionActualizada.getCodigo();
         for (Cancion cancion : cancionesTop100Billboard) {

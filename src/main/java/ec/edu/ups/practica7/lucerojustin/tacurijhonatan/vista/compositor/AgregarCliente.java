@@ -8,6 +8,7 @@ import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.controlador.ControladorC
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.controlador.ControladorCompositor;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Cantante;
 import ec.edu.ups.practica7.lucerojustin.tacurijhonatan.modelo.Compositor;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
@@ -22,7 +23,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private ControladorCompositor controladorCompositor;
     private ControladorCantante controladorCantante;
     private ResourceBundle mensajes;
-    
+    private Compositor compositorTempo;
+    private Cantante cantanteTempo;
     /**
      * Creates new form AgregarCliente
      */
@@ -538,7 +540,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
-            Compositor compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
+            compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
             if (compositorTempo !=null) {
                 txtNombre.setText(compositorTempo.getNombre());
                 txtApellido.setText(compositorTempo.getApellido());
@@ -564,7 +566,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         if (txtID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno"));
         }else{
-            Cantante cantanteTempo = controladorCantante.buscarCantante(Integer.parseInt(txtID.getText()));
+            cantanteTempo = controladorCantante.buscarCantante(Integer.parseInt(txtID.getText()));
             if (cantanteTempo !=null) {
                 txtNombre1.setText(cantanteTempo.getNombre());
                 txtApellido1.setText(cantanteTempo.getApellido());
@@ -596,11 +598,38 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         if(txtID.getText().isEmpty() || txtId.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.camposnollenos")); 
         }else{
-            controladorCompositor.agregarClienteCan(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), controladorCantante.buscarCantante(Integer.parseInt(txtID.getText()))); 
-            JOptionPane.showMessageDialog(this, mensajes.getString("joption.seagregolciente")); 
-            System.out.println(controladorCompositor.verCompositores());
-            this.limpiarCampos();
-            this.limpiarCamposCantante();
+            int id = Integer.parseInt(txtID.getText()); 
+            if(compositorTempo.buscarCliente(id) == null){
+                if(id!=0){
+                  Cantante cliente = new Cantante(llenarEspacio(txtNombreArtistico.getText()), llenarEspacioGenero(txtGeneroMusical.getText()), Integer.parseInt(txtNumeroSencillos.getText()), Integer.parseInt(txtNumeroConciertos.getText()), Integer.parseInt(txtNumeroGiras.getText()), Integer.parseInt(txtID.getText()),
+                    llenarEspacio(txtNombre1.getText()) , llenarEspacio(txtApellido1.getText()), Integer.parseInt(txtEdad1.getText()), llenarEspacio(txtNacionalidad1.getText()), Double.parseDouble(txtSalario1.getText())); 
+                List<Cantante> listaClientes = compositorTempo.getCliente();
+                boolean noEspacio = false;
+                for (int i = 0; i < listaClientes.size(); i++) {
+                    if(listaClientes.get(i).getCodigo() ==0 ){
+                        listaClientes.set(i, cliente);
+                        noEspacio=true;
+                        break;
+                    }
+                }
+                if(noEspacio){
+                    compositorTempo.setCliente(listaClientes);
+                    controladorCompositor.actualizarCompositor(compositorTempo); 
+            //compositorTempo.agregarClientE(cantanteTempo);
+            //controladorCompositor.agregarClienteCan(controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText())), controladorCantante.buscarCantante(Integer.parseInt(txtID.getText()))); 
+                    JOptionPane.showMessageDialog(this, mensajes.getString("joption.seagregolciente")); 
+                    System.out.println(controladorCompositor.verCompositores());
+                    this.limpiarCampos();
+                    this.limpiarCamposCantante();
+                }else{
+                    JOptionPane.showMessageDialog(this, "No existe mas espacio");
+
+                }   
+                }
+                
+            }
+            
+            
         }
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
 
@@ -632,6 +661,24 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         txtNumeroSencillos.setText("");
         txtNumeroGiras.setText("");
         txtGeneroMusical.setText(""); 
+    }
+    
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 25; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
+    }
+    
+    private String llenarEspacioGenero(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
