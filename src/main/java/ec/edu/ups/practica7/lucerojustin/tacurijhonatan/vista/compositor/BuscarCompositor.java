@@ -25,7 +25,7 @@ import javax.swing.table.TableColumnModel;
 public class BuscarCompositor extends javax.swing.JInternalFrame {
     private ControladorCompositor controladorCompositor;
     private ResourceBundle mensajes;
-    private Compositor compositorTempo;
+    private Compositor compositor;
 
     /**
      * Creates new form BuscarCompositor
@@ -293,15 +293,15 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
         if (txtId.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.noestalleno")); 
         }else{
-            compositorTempo = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
-            if (compositorTempo !=null) {
-                txtNombre.setText(compositorTempo.getNombre());
-                txtApellido.setText(compositorTempo.getApellido());
-                txtEdad.setText( String.valueOf(compositorTempo.getEdad()));
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtNacionalidad.setText(compositorTempo.getNacionalidad());
-                txtSalario.setText(String.valueOf(compositorTempo.calcularSalario()));
-                txtNumeroComposiciones.setText(String.valueOf(compositorTempo.getNumeroDeComposiciones()));
+            compositor = controladorCompositor.buscarCompositor(Integer.parseInt(txtId.getText()));
+            if (compositor !=null) {
+                txtNombre.setText(compositor.getNombre());
+                txtApellido.setText(compositor.getApellido());
+                txtEdad.setText( String.valueOf(compositor.getEdad()));
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtNacionalidad.setText(compositor.getNacionalidad());
+                txtSalario.setText(String.valueOf(compositor.calcularSalario()));
+                txtNumeroComposiciones.setText(String.valueOf(compositor.getNumeroDeComposiciones()));
                 this.actualizarTabla();
                 this.actualizarTablaClientes();
                 System.out.println(controladorCompositor.verCompositores());
@@ -326,7 +326,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
     private void actualizarTabla(){
         DefaultTableModel modelo = (DefaultTableModel)this.tblCancion.getModel();
         modelo.setNumRows(0);
-        List <Cancion> listaCan = compositorTempo.getCancionesTop100Billboard();
+        List<Cancion> listaCan = compositor.getCancionesTop100Billboard();
         //if (listaPersonas!=null) {
             for (Cancion listaCa : listaCan) {
                 int cod = listaCa.getCodigo();
@@ -348,7 +348,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
     private void actualizarTablaClientes(){
         DefaultTableModel modelo = (DefaultTableModel)this.tblCanatntes.getModel();
         modelo.setNumRows(0);
-        List <Cantante> listaCantantes = compositorTempo.getCliente();
+        List<Cantante> listaCantantes = compositor.getCliente();
         //if (listaPersonas!=null) {
             for (Cantante listaCantan : listaCantantes) {
                 int id = listaCantan.getCodigo();
