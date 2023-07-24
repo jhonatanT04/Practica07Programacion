@@ -318,7 +318,7 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
             String letra = "          ";
             double tiempo = 0.00;
             Cancion cancion = new Cancion(codigo, titulo, letra, tiempo);
-            //Cancion cancion = new Cancion(0, llenarEspacio(""), llenarEspacio(""), 0.00);
+            
             compositor.agregarCancion(cancion); 
         }
     }
@@ -328,7 +328,7 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
         for (int i = palabra.length(); i < 25; i++) {
             nueva.append(" ");
         }
-        //System.out.println("Espacio del caracter :" + nueva.length());
+        
         return nueva.toString();
         
     }
