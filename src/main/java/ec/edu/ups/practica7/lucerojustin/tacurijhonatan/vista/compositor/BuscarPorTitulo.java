@@ -297,7 +297,8 @@ public class BuscarPorTitulo extends javax.swing.JInternalFrame {
         if (txtTituloCancion.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, mensajes.getString("joption.notitulo")); 
         }else{
-            Compositor compositorTempo = controladorCompositor.buscarPorTituloCancion(txtTituloCancion.getText()); 
+            String nomCan = this.llenarEspacio(txtTituloCancion.getText());
+            compositorTempo = controladorCompositor.buscarPorTituloCancion(nomCan); 
             if (compositorTempo !=null) {
                 txtId.setText(String.valueOf(compositorTempo.getCodigo())); 
                 txtNombre.setText(compositorTempo.getNombre());
@@ -330,11 +331,14 @@ public class BuscarPorTitulo extends javax.swing.JInternalFrame {
         //if (listaPersonas!=null) {
             for (Cancion listaCa : listaCan) {
                 int cod = listaCa.getCodigo();
-                String nom = listaCa.getTitulo();
-                String letra= listaCa.getLetra();
-                double duracion = listaCa.getTiempoEnMinutos();
-                Object[] rowDate = {cod,nom,letra,duracion};
-                modelo.addRow(rowDate);
+                if (cod!=0) {
+                    String nom = listaCa.getTitulo();
+                    String letra= listaCa.getLetra();
+                    double duracion = listaCa.getTiempoEnMinutos();
+                    Object[] rowDate = {cod,nom,letra,duracion};
+                    modelo.addRow(rowDate);
+                }
+                
             }
             this.tblCancion.setModel(modelo);
         //}else{
@@ -351,6 +355,14 @@ public class BuscarPorTitulo extends javax.swing.JInternalFrame {
         txtNacionalidad.setText("");
         txtSalario.setText("");
         txtNumeroComposiciones.setText("");
+    }
+    private String llenarEspacio(String palabra){
+        StringBuilder nueva = new StringBuilder(palabra);
+        for (int i = palabra.length(); i < 10; i++) {
+            nueva.append(" ");
+        }
+        System.out.println("Espacio del caracter :" + nueva.length());
+        return nueva.toString();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

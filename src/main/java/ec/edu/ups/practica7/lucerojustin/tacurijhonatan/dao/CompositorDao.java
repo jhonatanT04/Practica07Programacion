@@ -240,13 +240,14 @@ public class CompositorDao implements ICompositorDao{
     public Compositor buscarPorTituloDeCancion(String valor) {
         List<Compositor> listaCompositor = this.findAll();
         for (Compositor compositor : listaCompositor) { // iteramos sobre cada persona en la lista
-            if (compositor instanceof Compositor) { // si la persona es un compositor
+            //if (compositor instanceof Compositor) { // si la persona es un compositor
+                System.out.println("Listas de canciones"+compositor.getCancionesTop100Billboard());
                 for (Cancion cancion : compositor.getCancionesTop100Billboard()) { // iteramos sobre las canciones del compositor
                     if (cancion.getTitulo().equals(valor)) { 
                         return compositor; // solo se imprime la primera coincidencia, por lo que terminamos el método con un return
                     }
                 }
-            }
+            //}
         }
         return null;
     }
