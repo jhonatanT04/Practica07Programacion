@@ -137,7 +137,7 @@ public class CantanteDao implements ICantanteDao {
                 archivo.seek(i * bytesPorCantante);
                 int codigoCantante = archivo.readInt();
                 if (codigoCantante == cantante.getCodigo()) {
-                    //archivo.writeInt(cantante.getCodigo());
+                    
                     archivo.writeUTF(cantante.getNombre());
                     archivo.writeUTF(cantante.getApellido());
                     archivo.writeInt(cantante.getEdad());
@@ -149,7 +149,7 @@ public class CantanteDao implements ICantanteDao {
                     archivo.writeInt(cantante.getNumeroDeGiras());
                     archivo.writeDouble(cantante.getSalario());
                     List<Disco> listaDisc = cantante.getDiscos();
-                    //System.out.println("Lista del update = "+ listaDisc.toString());
+                    
                     for (int j = 0; i < listaDisc.size(); j++) {
                         archivo.writeInt(listaDisc.get(j).getCodigo());
                         archivo.writeUTF(listaDisc.get(j).getNombre());
@@ -161,13 +161,13 @@ public class CantanteDao implements ICantanteDao {
             }
         }archivo.close();
 
-        //System.out.println("No ser encontr cantante");
+        
         } catch (FileNotFoundException e) {
             System.out.println("Ruta no encontrada");
-            } catch (IOException e1) {
-                System.out.println("Error de Lectura");
-            } catch (Exception e) {
-                System.out.println("Error General");
+        } catch (IOException e1) {
+            System.out.println("Error de Lectura");
+        } catch (Exception e) {
+            System.out.println("Error General");
         }
     }
 
@@ -178,7 +178,7 @@ public class CantanteDao implements ICantanteDao {
 
             int bytesPorCantante = 363;
             long numCantantes = archivito.length() / bytesPorCantante;
-            //boolean encontrado = false;
+            
             for (int i = 0; i < numCantantes; i++) {
                 archivito.seek(i * bytesPorCantante);
                 int codigoCantante = archivito.readInt();
