@@ -110,27 +110,27 @@ public class BuscarPorTitulo extends javax.swing.JInternalFrame {
 
         jblIdBuscarPorTitulo.setText("ID:");
         jpanelA.add(jblIdBuscarPorTitulo);
-        jblIdBuscarPorTitulo.setBounds(60, 55, 14, 16);
+        jblIdBuscarPorTitulo.setBounds(60, 55, 70, 16);
 
         jblNombreBuscarPorTitulo.setText("Nombre:");
         jpanelA.add(jblNombreBuscarPorTitulo);
-        jblNombreBuscarPorTitulo.setBounds(60, 89, 47, 16);
+        jblNombreBuscarPorTitulo.setBounds(60, 89, 80, 16);
 
         jblApellidoBuscarPorTitulo.setText("Apellido:");
         jpanelA.add(jblApellidoBuscarPorTitulo);
-        jblApellidoBuscarPorTitulo.setBounds(60, 123, 47, 16);
+        jblApellidoBuscarPorTitulo.setBounds(60, 123, 110, 16);
 
         jblEdadBuscarPorTitulo.setText("Edad:");
         jpanelA.add(jblEdadBuscarPorTitulo);
-        jblEdadBuscarPorTitulo.setBounds(60, 163, 29, 16);
+        jblEdadBuscarPorTitulo.setBounds(60, 163, 80, 16);
 
         jblNacionalidadBuscarPorTitulo.setText("Nacionalidad:");
         jpanelA.add(jblNacionalidadBuscarPorTitulo);
-        jblNacionalidadBuscarPorTitulo.setBounds(60, 197, 73, 16);
+        jblNacionalidadBuscarPorTitulo.setBounds(60, 197, 100, 16);
 
         jblSalarioBuscarPorTitulo.setText("Salario:");
         jpanelA.add(jblSalarioBuscarPorTitulo);
-        jblSalarioBuscarPorTitulo.setBounds(60, 231, 38, 16);
+        jblSalarioBuscarPorTitulo.setBounds(60, 231, 70, 16);
 
         jblNumeroComposicionesBuscarPorTitulo.setText("Numero de Composiciones:");
         jpanelA.add(jblNumeroComposicionesBuscarPorTitulo);

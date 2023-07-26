@@ -104,23 +104,23 @@ public class EliminarCompositor extends javax.swing.JInternalFrame {
 
         jblNombreEliminarCompositor.setText("Nombre:");
         jpanelA.add(jblNombreEliminarCompositor);
-        jblNombreEliminarCompositor.setBounds(60, 67, 47, 16);
+        jblNombreEliminarCompositor.setBounds(60, 67, 80, 16);
 
         jblApellidoEliminarCompositor.setText("Apellido:");
         jpanelA.add(jblApellidoEliminarCompositor);
-        jblApellidoEliminarCompositor.setBounds(60, 101, 47, 16);
+        jblApellidoEliminarCompositor.setBounds(60, 101, 80, 16);
 
         jblEdadEliminarCompositor.setText("Edad:");
         jpanelA.add(jblEdadEliminarCompositor);
-        jblEdadEliminarCompositor.setBounds(60, 135, 29, 16);
+        jblEdadEliminarCompositor.setBounds(60, 135, 70, 16);
 
         jblNacionalidadEliminarCompositor.setText("Nacionalidad:");
         jpanelA.add(jblNacionalidadEliminarCompositor);
-        jblNacionalidadEliminarCompositor.setBounds(60, 169, 73, 16);
+        jblNacionalidadEliminarCompositor.setBounds(60, 169, 110, 16);
 
         jblSalarioEliminarCompositor.setText("Salario:");
         jpanelA.add(jblSalarioEliminarCompositor);
-        jblSalarioEliminarCompositor.setBounds(60, 209, 38, 16);
+        jblSalarioEliminarCompositor.setBounds(60, 209, 80, 16);
 
         jblNumeroComposicionesEliminarCompositor.setText("Numero de Composiciones:");
         jpanelA.add(jblNumeroComposicionesEliminarCompositor);

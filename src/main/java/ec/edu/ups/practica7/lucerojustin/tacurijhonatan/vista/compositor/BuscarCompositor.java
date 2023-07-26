@@ -102,7 +102,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
 
         jblNombreBuscarCompositor.setText("Nombre:");
         jpanelA.add(jblNombreBuscarCompositor);
-        jblNombreBuscarCompositor.setBounds(60, 66, 47, 16);
+        jblNombreBuscarCompositor.setBounds(60, 66, 80, 16);
 
         jblApellidoBuscarCompositor.setText("Apellido:");
         jpanelA.add(jblApellidoBuscarCompositor);
@@ -110,7 +110,7 @@ public class BuscarCompositor extends javax.swing.JInternalFrame {
 
         jblEdadBuscarCompositor.setText("Edad:");
         jpanelA.add(jblEdadBuscarCompositor);
-        jblEdadBuscarCompositor.setBounds(60, 134, 29, 16);
+        jblEdadBuscarCompositor.setBounds(60, 134, 80, 16);
 
         jblNacionalidadBuscarCompositor.setText("Nacionalidad:");
         jpanelA.add(jblNacionalidadBuscarCompositor);

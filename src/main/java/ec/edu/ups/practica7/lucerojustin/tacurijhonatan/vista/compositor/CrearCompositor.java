@@ -105,23 +105,23 @@ public class CrearCompositor extends javax.swing.JInternalFrame {
 
         jblNombreCrearCompositor.setText("Nombre:");
         jpanelA.add(jblNombreCrearCompositor);
-        jblNombreCrearCompositor.setBounds(75, 73, 47, 16);
+        jblNombreCrearCompositor.setBounds(75, 73, 70, 16);
 
         jblApellidoCrearCompositor.setText("Apellido:");
         jpanelA.add(jblApellidoCrearCompositor);
-        jblApellidoCrearCompositor.setBounds(75, 107, 47, 16);
+        jblApellidoCrearCompositor.setBounds(75, 107, 100, 16);
 
         jblEdadCrearCompositor.setText("Edad:");
         jpanelA.add(jblEdadCrearCompositor);
-        jblEdadCrearCompositor.setBounds(75, 141, 29, 16);
+        jblEdadCrearCompositor.setBounds(75, 141, 60, 16);
 
         jblNacionalidadCrearCompositor.setText("Nacionalidad:");
         jpanelA.add(jblNacionalidadCrearCompositor);
-        jblNacionalidadCrearCompositor.setBounds(75, 175, 73, 16);
+        jblNacionalidadCrearCompositor.setBounds(75, 175, 110, 16);
 
         jblSalarioCrearCompositor.setText("Salario:");
         jpanelA.add(jblSalarioCrearCompositor);
-        jblSalarioCrearCompositor.setBounds(75, 215, 38, 16);
+        jblSalarioCrearCompositor.setBounds(75, 215, 90, 16);
 
         jblNumeroComposicionesCrearCompositor.setText("Numero de Composiciones:");
         jpanelA.add(jblNumeroComposicionesCrearCompositor);

@@ -106,23 +106,23 @@ public class ActualizarCompositor extends javax.swing.JInternalFrame {
 
         jblNombreActualizarCompositor.setText("Nombre:");
         jpanelA.add(jblNombreActualizarCompositor);
-        jblNombreActualizarCompositor.setBounds(60, 67, 47, 16);
+        jblNombreActualizarCompositor.setBounds(60, 67, 70, 16);
 
         jblApellidoActualizarCompositor.setText("Apellido:");
         jpanelA.add(jblApellidoActualizarCompositor);
-        jblApellidoActualizarCompositor.setBounds(60, 101, 47, 16);
+        jblApellidoActualizarCompositor.setBounds(60, 101, 90, 16);
 
         jblEdadActualizarCompositor.setText("Edad:");
         jpanelA.add(jblEdadActualizarCompositor);
-        jblEdadActualizarCompositor.setBounds(60, 135, 29, 16);
+        jblEdadActualizarCompositor.setBounds(60, 135, 80, 16);
 
         jblNacionalidadActualizarCompositor.setText("Nacionalidad:");
         jpanelA.add(jblNacionalidadActualizarCompositor);
-        jblNacionalidadActualizarCompositor.setBounds(60, 169, 73, 16);
+        jblNacionalidadActualizarCompositor.setBounds(60, 169, 100, 16);
 
         jblSalarioActualizarCompositor.setText("Salario:");
         jpanelA.add(jblSalarioActualizarCompositor);
-        jblSalarioActualizarCompositor.setBounds(60, 209, 38, 16);
+        jblSalarioActualizarCompositor.setBounds(60, 209, 80, 16);
 
         jblNumeroComposiciones.setText("Numero de Composiciones:");
         jpanelA.add(jblNumeroComposiciones);
